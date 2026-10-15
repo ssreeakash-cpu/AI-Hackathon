@@ -1,0 +1,955 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -54.04114,
+          -12.65704
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 337.91,
+        "frp_mw": 598.0,
+        "confidence": "low",
+        "acq_date": "2026-10-14",
+        "acq_time": 1745,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.64233,
+          -6.97383
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 208.0,
+        "frp_mw": 565.35,
+        "confidence": "low",
+        "acq_date": "2026-10-14",
+        "acq_time": 1747,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -40.76049,
+          -13.53944
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 470.48,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 1603,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.66833,
+          -2.81142
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 384.09,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 557,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.5764,
+          -2.76568
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 366.97,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 557,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.24475,
+          -3.38061
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 208.0,
+        "frp_mw": 344.33,
+        "confidence": "low",
+        "acq_date": "2026-10-14",
+        "acq_time": 557,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.20433,
+          -14.5095
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 303.96,
+        "confidence": "low",
+        "acq_date": "2026-10-15",
+        "acq_time": 1221,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.20077,
+          -14.51005
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 303.96,
+        "confidence": "low",
+        "acq_date": "2026-10-15",
+        "acq_time": 1221,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -37.12066,
+          -10.49537
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 333.83,
+        "frp_mw": 301.98,
+        "confidence": "nominal",
+        "acq_date": "2026-10-15",
+        "acq_time": 1546,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.97523,
+          -17.49032
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 291.49,
+        "confidence": "high",
+        "acq_date": "2026-10-15",
+        "acq_time": 1041,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.13603,
+          -3.3493
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 275.72,
+        "confidence": "low",
+        "acq_date": "2026-10-14",
+        "acq_time": 557,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.24702,
+          -3.37671
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 357.21,
+        "frp_mw": 274.71,
+        "confidence": "low",
+        "acq_date": "2026-10-15",
+        "acq_time": 720,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.68455,
+          -2.81711
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 267.51,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 557,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.67953,
+          -2.81785
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 267.51,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 557,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.24281,
+          -3.38172
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 208.0,
+        "frp_mw": 258.11,
+        "confidence": "low",
+        "acq_date": "2026-10-14",
+        "acq_time": 557,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          141.23996,
+          -7.74295
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 257.97,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 417,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.95409,
+          -5.55997
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 255.36,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 1607,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.76848,
+          -7.17956
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 208.0,
+        "frp_mw": 254.02,
+        "confidence": "low",
+        "acq_date": "2026-10-14",
+        "acq_time": 1747,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.76435,
+          -7.17901
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 254.02,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 1747,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          138.42924,
+          -4.09615
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 251.51,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 417,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          125.02417,
+          51.03181
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 352.8,
+        "frp_mw": 251.0,
+        "confidence": "nominal",
+        "acq_date": "2026-10-15",
+        "acq_time": 553,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          138.42934,
+          -4.09539
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 240.28,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 417,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.51903,
+          -7.18916
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 238.57,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 1605,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.52495,
+          -7.18505
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 347.75,
+        "frp_mw": 238.57,
+        "confidence": "nominal",
+        "acq_date": "2026-10-14",
+        "acq_time": 1605,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          46.55436,
+          -15.59239
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 237.4,
+        "confidence": "low",
+        "acq_date": "2026-10-14",
+        "acq_time": 1100,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.2402,
+          46.41904
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 236.54,
+        "confidence": "low",
+        "acq_date": "2026-10-14",
+        "acq_time": 2125,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.23469,
+          46.41951
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 352.39,
+        "frp_mw": 236.54,
+        "confidence": "nominal",
+        "acq_date": "2026-10-14",
+        "acq_time": 2125,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -37.12472,
+          -10.50051
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 310.71,
+        "frp_mw": 235.91,
+        "confidence": "low",
+        "acq_date": "2026-10-15",
+        "acq_time": 1546,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -107.50568,
+          38.23141
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 343.98,
+        "frp_mw": 234.6,
+        "confidence": "nominal",
+        "acq_date": "2026-10-14",
+        "acq_time": 1942,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.13626,
+          -5.01708
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 233.62,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 1102,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.66891,
+          -2.81538
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 322.39,
+        "frp_mw": 231.3,
+        "confidence": "low",
+        "acq_date": "2026-10-14",
+        "acq_time": 557,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.67451,
+          -2.81859
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 231.3,
+        "confidence": "low",
+        "acq_date": "2026-10-14",
+        "acq_time": 557,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.1909,
+          -2.52178
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 223.59,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 557,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          34.89306,
+          -5.59465
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 223.25,
+        "confidence": "high",
+        "acq_date": "2026-10-15",
+        "acq_time": 1043,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.27217,
+          -22.50805
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 222.15,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 1058,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.27654,
+          -22.51079
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 222.15,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 1058,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.71724,
+          -1.20477
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 219.25,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 557,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          125.7491,
+          51.37298
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 338.06,
+        "frp_mw": 219.24,
+        "confidence": "nominal",
+        "acq_date": "2026-10-15",
+        "acq_time": 414,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.22592,
+          -18.81809
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 354.49,
+        "frp_mw": 219.01,
+        "confidence": "nominal",
+        "acq_date": "2026-10-14",
+        "acq_time": 1058,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          131.83612,
+          48.06112
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 337.1,
+        "frp_mw": 217.53,
+        "confidence": "nominal",
+        "acq_date": "2026-10-14",
+        "acq_time": 251,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.34706,
+          39.21596
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 216.4,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 610,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.38025,
+          -10.39813
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 351.43,
+        "frp_mw": 214.87,
+        "confidence": "nominal",
+        "acq_date": "2026-10-14",
+        "acq_time": 1605,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.38615,
+          -10.39889
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 334.43,
+        "frp_mw": 214.87,
+        "confidence": "nominal",
+        "acq_date": "2026-10-14",
+        "acq_time": 1605,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -54.23095,
+          -3.18324
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 353.18,
+        "frp_mw": 214.52,
+        "confidence": "nominal",
+        "acq_date": "2026-10-14",
+        "acq_time": 1747,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.28891,
+          -22.53624
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 213.38,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 1058,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.28515,
+          -22.53682
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 213.38,
+        "confidence": "high",
+        "acq_date": "2026-10-14",
+        "acq_time": 1058,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.96459,
+          59.66121
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 348.2,
+        "frp_mw": 210.95,
+        "confidence": "nominal",
+        "acq_date": "2026-10-14",
+        "acq_time": 616,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -44.52825,
+          -4.40377
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 208.0,
+        "frp_mw": 210.87,
+        "confidence": "low",
+        "acq_date": "2026-10-15",
+        "acq_time": 1548,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -44.52232,
+          -4.40294
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 367.0,
+        "frp_mw": 210.87,
+        "confidence": "high",
+        "acq_date": "2026-10-15",
+        "acq_time": 1548,
+        "daynight": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          49.42369,
+          -12.88314
+        ]
+      },
+      "properties": {
+        "sensor": "VIIRS (Suomi-NPP)",
+        "brightness_k": 355.69,
+        "frp_mw": 209.38,
+        "confidence": "nominal",
+        "acq_date": "2026-10-14",
+        "acq_time": 1100,
+        "daynight": "D"
+      }
+    }
+  ]
+}

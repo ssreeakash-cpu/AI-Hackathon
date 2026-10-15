@@ -1,0 +1,29 @@
+{
+    "model": "ConvLSTM + Temporal Attention",
+    "dataset": "MODIS/VIIRS 27-Band Multi-Spectral NetCDF Datacube",
+    "spatial_resolution": "1 km x 1 km (64x64 patch)",
+    "temporal_sequence_length": 10,
+    "classes": [
+        "No fire",
+        "Smoke",
+        "Early fire",
+        "Major wildfire spread"
+    ],
+    "predicted_class": 3,
+    "predicted_confidence": 0.9992678761482239,
+    "temporal_attention_weights": [
+        0.0193,
+        0.0878,
+        0.1066,
+        0.1024,
+        0.1251,
+        0.0382,
+        0.0639,
+        0.0863,
+        0.1491,
+        0.2212
+    ],
+    "growth_velocity_km2_day": 12.8,
+    "spread_risk": "HIGH",
+    "real_dataset": true
+}

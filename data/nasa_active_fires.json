@@ -1,0 +1,227 @@
+[
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.72528,
+        "longitude": 130.19617,
+        "brightness_kelvin": 499.97,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.72668,
+        "longitude": 130.20691,
+        "brightness_kelvin": 499.97,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.72808,
+        "longitude": 130.21765,
+        "brightness_kelvin": 499.97,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.7375,
+        "longitude": 130.21634,
+        "brightness_kelvin": 499.97,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.74031,
+        "longitude": 130.23788,
+        "brightness_kelvin": 499.97,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.75031,
+        "longitude": 130.27406,
+        "brightness_kelvin": 499.97,
+        "confidence": "87",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -5.99945,
+        "longitude": -40.95909,
+        "brightness_kelvin": 494.35,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "1834"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -11.85142,
+        "longitude": -43.588,
+        "brightness_kelvin": 489.29,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "1834"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.73189,
+        "longitude": 130.17345,
+        "brightness_kelvin": 486.24,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.72388,
+        "longitude": 130.18546,
+        "brightness_kelvin": 485.95,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -11.90591,
+        "longitude": -41.40185,
+        "brightness_kelvin": 485.64,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "1834"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.74454,
+        "longitude": 130.27031,
+        "brightness_kelvin": 485.17,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.73049,
+        "longitude": 130.16275,
+        "brightness_kelvin": 484.99,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -12.01025,
+        "longitude": -43.47412,
+        "brightness_kelvin": 483.62,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "1834"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.72948,
+        "longitude": 130.22841,
+        "brightness_kelvin": 483.03,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -12.01168,
+        "longitude": -43.48468,
+        "brightness_kelvin": 481.43,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "1834"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -12.00812,
+        "longitude": -43.47986,
+        "brightness_kelvin": 478.84,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "1834"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.7389,
+        "longitude": 130.22711,
+        "brightness_kelvin": 473.34,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.67004,
+        "longitude": 130.1387,
+        "brightness_kelvin": 472.64,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -11.62731,
+        "longitude": -43.60419,
+        "brightness_kelvin": 469.71,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "1834"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -6.67842,
+        "longitude": -45.3995,
+        "brightness_kelvin": 468.62,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "1834"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.74172,
+        "longitude": 130.24867,
+        "brightness_kelvin": 466.9,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -12.01698,
+        "longitude": -43.45109,
+        "brightness_kelvin": 464.08,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "1834"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.7895,
+        "longitude": 130.27962,
+        "brightness_kelvin": 462.32,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    },
+    {
+        "source": "NASA MODIS Satellite",
+        "latitude": -20.73329,
+        "longitude": 130.18414,
+        "brightness_kelvin": 461.95,
+        "confidence": "100",
+        "acq_date": "2026-10-08",
+        "acq_time": "2354"
+    }
+]

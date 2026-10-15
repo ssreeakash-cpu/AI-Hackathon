@@ -1,0 +1,30 @@
+# Python virtual environment
+.venv/
+env/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.tmp
+
+# Large Model Weights (> 100MB exceeds GitHub push limits)
+*.pth
+*.pt
+*.bin
+*.onnx
+runs/detect/output/yolo/*/weights/
+models/baseline_cnn/weights/
+
+# Frontend Node packages and build artifacts
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+
+# Unrelated temporary folders
+routee-powertrain-main/
+routee-powertrain-main.zip
+
+# OS artifacts
+.DS_Store
+Thumbs.db

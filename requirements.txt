@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+pydantic
+torch
+torchvision
+torchaudio
+opencv-python
+numpy
+pandas
+scikit-learn
+xarray
+netCDF4

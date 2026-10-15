@@ -1,0 +1,41 @@
+{
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "confusion_matrix": [
+        [
+            0,
+            0,
+            0,
+            0
+        ],
+        [
+            0,
+            2,
+            0,
+            0
+        ],
+        [
+            0,
+            0,
+            0,
+            0
+        ],
+        [
+            0,
+            0,
+            0,
+            0
+        ]
+    ],
+    "classes": [
+        "Fire",
+        "Smoke",
+        "Clouds/Fog",
+        "Dust/Clear"
+    ],
+    "model": "baseline_cnn",
+    "dataset": "HPWREN Real Camera Surveillance Dataset",
+    "real_dataset": true
+}

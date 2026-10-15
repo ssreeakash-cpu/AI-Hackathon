@@ -1,0 +1,15 @@
+# Problem Statement 25 - Camera Fire & Smoke Dataset Config
+path: C:/Users/Akash/Downloads/ai/datasets/camera_surveillance
+train: train/images
+val: val/images
+
+# Classes:
+# 0: Fire
+# 1: Smoke
+# 2: Clouds & Fog (Negative distractor)
+# 3: Dust & Clear (Negative distractor)
+names:
+  0: fire
+  1: smoke
+  2: clouds_fog
+  3: dust_clear

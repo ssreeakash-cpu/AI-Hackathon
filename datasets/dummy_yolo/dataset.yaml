@@ -1,0 +1,7 @@
+
+path: C:/Users/Akash/Downloads/ai/datasets/dummy_yolo
+train: images/train
+val: images/val
+names:
+  0: fire
+  1: smoke
