@@ -2,66 +2,90 @@
     "project": "AI-Based Early Detection of Forest Fire and Smoke from Satellite / Camera Images",
     "tech_a_thon_problem_statement": 25,
     "institution": "School of Computer Science Engineering and Information Systems, VIT",
-    "download_timestamp": "2026-10-15 17:56:15 UTC",
+    "total_datasets_in_suite": 6,
     "datasets": {
-        "nasa_earthdata": {
-            "source": "NASA Earth Observing System Data and Information System (EOSDIS) FIRMS",
-            "portal_url": "https://firms.modaps.eosdis.nasa.gov/",
-            "sensors": {
-                "MODIS": {
-                    "instrument": "Moderate Resolution Imaging Spectroradiometer",
-                    "satellites": [
-                        "Terra (EOS AM-1)",
-                        "Aqua (EOS PM-1)"
-                    ],
-                    "resolution": "1 km spatial resolution",
-                    "bands_utilized": "Channel 21/22 (4 \u00b5m high-temp) and Channel 31 (11 \u00b5m TIR)",
-                    "files": [
-                        "datasets/nasa_earthdata/modis/MODIS_C6_1_Global_24h.csv",
-                        "datasets/nasa_earthdata/modis/MODIS_C6_1_Global_7d.csv",
-                        "datasets/nasa_earthdata/south_asia_india/MODIS_SouthAsia_India_24h.csv"
-                    ]
-                },
-                "VIIRS": {
-                    "instrument": "Visible Infrared Imaging Radiometer Suite",
-                    "satellites": [
-                        "Suomi-NPP",
-                        "NOAA-20 (JPSS-1)",
-                        "NOAA-21 (JPSS-2)"
-                    ],
-                    "resolution": "375 m spatial resolution (3x higher fidelity than MODIS)",
-                    "bands_utilized": "I-Band 4 (3.74 \u00b5m thermal) and I-Band 5 (11.45 \u00b5m TIR)",
-                    "files": [
-                        "datasets/nasa_earthdata/viirs/SUOMI_VIIRS_C2_Global_24h.csv",
-                        "datasets/nasa_earthdata/viirs/SUOMI_VIIRS_C2_Global_7d.csv",
-                        "datasets/nasa_earthdata/viirs/J1_VIIRS_C2_Global_24h.csv",
-                        "datasets/nasa_earthdata/viirs/J1_VIIRS_C2_Global_7d.csv",
-                        "datasets/nasa_earthdata/viirs/J2_VIIRS_C2_Global_24h.csv",
-                        "datasets/nasa_earthdata/viirs/J2_VIIRS_C2_Global_7d.csv",
-                        "datasets/nasa_earthdata/south_asia_india/VIIRS_SouthAsia_India_24h.csv"
-                    ]
-                }
-            },
-            "gis_exports": [
-                "datasets/nasa_earthdata/nasa_active_fires.geojson"
-            ]
-        },
-        "camera_surveillance": {
-            "classes": [
-                "0: fire",
-                "1: smoke",
-                "2: clouds_fog (distractor)",
-                "3: dust_clear (distractor)"
+        "1_nasa_modis": {
+            "name": "NASA MODIS Collection 6.1 Active Fire Dataset",
+            "source": "NASA EOSDIS FIRMS (Terra and Aqua Satellites)",
+            "spatial_resolution": "1 km x 1 km",
+            "channels": "4 \u00b5m (brightness) & 11 \u00b5m (bright_t31) Thermal Infrared, Fire Radiative Power (MW)",
+            "coverage": [
+                "Global 24h",
+                "Global 7d",
+                "South Asia / India Regional 24h"
             ],
-            "format": "YOLO format (.jpg/.png + normalized .txt bounding boxes)",
-            "config_file": "datasets/camera_surveillance/dataset.yaml",
-            "purpose": "Distinguishes smoke from clouds/fog and detects camera fire/smoke ROIs for Hybrid Models 1 to 4"
+            "path": "datasets/nasa_earthdata/modis/"
         },
-        "satellite_multispectral_cubes": {
-            "format": "NetCDF (.nc)",
-            "schema": "27-variable multi-spectral datacube (LST Day/Night, NDVI, Wind, Temp, Humidity, FRP)",
-            "dimensions": "10 days (temporal) x 64 km x 64 km (spatial)",
-            "purpose": "Input for ConvLSTM + Attention and 3D-UNet temporal wildfire spread models"
+        "2_nasa_viirs": {
+            "name": "NASA VIIRS 375m Collection 2 Active Fire Dataset",
+            "source": "NASA EOSDIS FIRMS (Suomi-NPP, NOAA-20, NOAA-21 Satellites)",
+            "spatial_resolution": "375 m (3x higher spatial fidelity than MODIS)",
+            "channels": "I-Band 4 (3.74 \u00b5m) & I-Band 5 (11.45 \u00b5m) TIR, Fire Radiative Power (MW)",
+            "coverage": [
+                "Global 24h",
+                "Global 7d",
+                "South Asia / India Regional 24h"
+            ],
+            "path": "datasets/nasa_earthdata/viirs/"
+        },
+        "3_environmental_weather_fwi": {
+            "name": "UCI Forest Fire Weather Index (FWI) & Meteorological Dataset",
+            "source": "UCI Machine Learning Repository",
+            "variables": [
+                "Temperature",
+                "Relative Humidity",
+                "Wind Speed",
+                "Rain",
+                "FFMC",
+                "DMC",
+                "DC",
+                "ISI",
+                "Burned Area"
+            ],
+            "purpose": "Provides environmental fire risk factors to the Multi-Model Risk Fusion Engine",
+            "path": "datasets/environmental_weather_fwi/forestfires.csv"
+        },
+        "4_camera_surveillance": {
+            "name": "Wildfire Camera Surveillance Fire & Smoke Dataset",
+            "source": "HPWREN (High Performance Wireless Research and Education Network) & DeepQuest AI",
+            "classes": [
+                "0: Fire",
+                "1: Smoke",
+                "2: Clouds/Fog",
+                "3: Dust/Clear"
+            ],
+            "format": "YOLO Bounding Box Annotations (.txt) + RGB Images",
+            "purpose": "Ground and aerial camera surveillance inference for early plume detection",
+            "path": "datasets/camera_surveillance/"
+        },
+        "5_distractors_clouds_fog": {
+            "name": "Environmental Distractor Benchmark Dataset (Clouds, Fog, Dust, Haze)",
+            "source": "AI For Mankind & DeepQuest AI",
+            "classes": [
+                "Clouds",
+                "Fog",
+                "Atmospheric Haze",
+                "Barren Terrain"
+            ],
+            "purpose": "Explicit negative training to eliminate false positives from ambient clouds or morning fog",
+            "path": "datasets/distractors_clouds_fog/"
+        },
+        "6_satellite_multispectral_datacubes": {
+            "name": "Multi-Spectral 27-Band NetCDF Datacubes (.nc)",
+            "source": "WildFireSpread & mesogeos DataCube Schema",
+            "dimensions": "10 Temporal Days x 64 km x 64 km Spatial Patches",
+            "variables": [
+                "MODIS LST Day",
+                "MODIS LST Night",
+                "NDVI",
+                "Active Fire Mask",
+                "ERA5 Wind Vectors",
+                "Temperature",
+                "Humidity",
+                "FRP"
+            ],
+            "purpose": "Spatial-Temporal ConvLSTM + Attention wildfire spread prediction",
+            "path": "datasets/satellite_multispectral/sample_modis_viirs_10days_64x64.nc"
         }
     }
 }

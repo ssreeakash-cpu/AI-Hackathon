@@ -15,21 +15,35 @@ This repository implements an end-to-end, multi-modal **Spatial-Temporal AI Wild
 
 ---
 
-## 🛰️ Public Datasets Utilized
+## 🛰️ Public Multi-Modal Datasets Suite (6 Distinct Datasets)
 
-### 1. NASA Earthdata (MODIS & VIIRS Fire Data)
-Direct integration of real telemetry from NASA's Fire Information for Resource Management System (FIRMS):
-* **NASA MODIS (Terra & Aqua)**: 1 km spatial resolution, 4 µm and 11 µm thermal infrared channels, Fire Radiative Power (FRP in MW).
-* **NASA VIIRS (Suomi-NPP, NOAA-20, NOAA-21)**: 375 m high-resolution active fire observations across 24-hour and 7-day intervals.
-* **South Asia / India Regional Extracts**: Filtered real-time fire points within Indian boundaries for regional early warnings.
+This project integrates a comprehensive suite of **6 distinct datasets** covering satellite remote sensing, ground surveillance cameras, environmental meteorology, and negative distractor scenes:
 
-### 2. Camera Surveillance Benchmark Dataset
-* **Source**: Curated from public-domain HPWREN (High Performance Wireless Research and Education Network) and AI For Mankind datasets.
-* **Classes**: `0: Fire`, `1: Smoke`, `2: Clouds/Fog (Negative Distractor)`, `3: Dust/Clear`.
-* **Annotations**: Standard YOLO bounding box format for real-time localization.
+1. **NASA MODIS Collection 6.1 Active Fire Dataset** (`datasets/nasa_earthdata/modis/`):
+   * Satellites: NASA Terra and Aqua (1 km spatial resolution).
+   * Channels: 4 µm and 11 µm Thermal Infrared, Fire Radiative Power (MW).
+   * Files: Global 24h, Global 7d, and South Asia / India regional extracts.
 
-### 3. Multi-Spectral NetCDF Datacubes (`.nc`)
-* 27 remote sensing variables over 10 temporal days x 64x64 km patches (MODIS LST Day/Night, NDVI, Active Fire Mask, ERA5 Wind Vectors, Temperature, Humidity).
+2. **NASA VIIRS 375m Collection 2 Active Fire Dataset** (`datasets/nasa_earthdata/viirs/`):
+   * Satellites: Suomi-NPP, NOAA-20 (J1), NOAA-21 (J2).
+   * Channels: 375 m high-resolution I-Bands (I4 & I5), Fire Radiative Power (MW).
+   * Files: Global 24h, Global 7d, and South Asia / India regional extracts.
+
+3. **UCI Forest Fire Weather Index (FWI) & Meteorological Dataset** (`datasets/environmental_weather_fwi/`):
+   * Variables: Temperature, Relative Humidity, Wind Speed, Rain, FFMC, DMC, DC, ISI, Burned Area.
+   * Role: Ingested by the Risk Fusion Engine for environmental hazard rating.
+
+4. **Camera & Drone Fire/Smoke Surveillance Dataset** (`datasets/camera_surveillance/`):
+   * Sources: HPWREN Camera Network & DeepQuest AI.
+   * Classes: `0: Fire`, `1: Smoke`, `2: Clouds/Fog`, `3: Dust/Clear`.
+   * Format: Standard YOLO bounding box coordinates (`train/`, `val/`, `dataset.yaml`).
+
+5. **Environmental Distractor Benchmark Dataset** (`datasets/distractors_clouds_fog/`):
+   * Benchmark distractor imagery to train models to distinguish actual wildfire smoke from **ambient clouds, morning fog, dust, and haze**.
+
+6. **Multi-Spectral 27-Band NetCDF Datacubes (`.nc`)** (`datasets/satellite_multispectral/`):
+   * 27 remote sensing variables over 10 days x 64x64 km patches (MODIS LST Day/Night, NDVI, Active Fire Mask, ERA5 Wind Vectors, Temperature, Humidity).
+   * Spatial-temporal input for the **ConvLSTM + Temporal Attention** wildfire spread prediction model.
 
 ---
 
