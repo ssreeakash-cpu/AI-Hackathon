@@ -1,0 +1,30 @@
+{
+    "pipeline": "CSV Classification with SMOTE & Regularized Gradient Boosting",
+    "test_accuracy": 0.9012345679012346,
+    "test_balanced_accuracy": 0.838768115942029,
+    "test_precision": 0.9089473268577746,
+    "test_recall": 0.9012345679012346,
+    "test_f1_score": 0.9043070219540807,
+    "test_roc_auc": 0.9463231347289319,
+    "confusion_matrix": [
+        [
+            192,
+            15
+        ],
+        [
+            9,
+            27
+        ]
+    ],
+    "feature_importances": {
+        "latitude": 0.0977,
+        "longitude": 0.1238,
+        "bright_ti4": 0.4404,
+        "scan": 0.1178,
+        "track": 0.0514,
+        "acq_time": 0.0566,
+        "bright_ti5": 0.1078,
+        "daynight": 0.0045
+    },
+    "total_test_samples": 243
+}

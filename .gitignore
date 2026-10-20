@@ -25,6 +25,12 @@ npm-debug.log*
 routee-powertrain-main/
 routee-powertrain-main.zip
 
+# WhatsApp Zips & Temporary Exports
+all_6_wildfire_datasets.zip
+whatsapp_dataset_zips/
+*.pdf
+crop_*.png
+
 # OS artifacts
 .DS_Store
 Thumbs.db
