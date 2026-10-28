@@ -102,9 +102,9 @@ export default function App() {
       <header style={{ borderBottom: '1px solid #2f3640', paddingBottom: '16px', marginBottom: '20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
-            <h1 style={{ margin: 0, color: '#e84118', fontSize: '26px' }}>🔥 AI Wildfire Early-Warning Command Center</h1>
+            <h1 style={{ margin: 0, color: '#e84118', fontSize: '26px' }}>AI Wildfire Early-Warning Command Center</h1>
             <p style={{ margin: '6px 0 0 0', color: '#718093', fontSize: '14px' }}>
-              Problem Statement 25 • VIT Tech-a-thon • Real NASA Earthdata (MODIS & VIIRS) + Spatial-Temporal ConvLSTM
+              Problem Statement 25 • VIT Tech-a-thon • NASA Earthdata (MODIS & VIIRS) + Spatial-Temporal ConvLSTM
             </p>
           </div>
           <div style={{ display: 'flex', gap: '8px' }}>
@@ -126,7 +126,7 @@ export default function App() {
               background: activeTab === 'satellite' ? '#e84118' : '#2f3640', 
               color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' 
             }}>
-            🛰️ NASA Satellite Hotspots (MODIS / VIIRS)
+            NASA Satellite Hotspots (MODIS / VIIRS)
           </button>
           
           <button 
@@ -136,7 +136,7 @@ export default function App() {
               background: activeTab === 'camera' ? '#e84118' : '#2f3640', 
               color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' 
             }}>
-            📹 Camera Surveillance (Smoke vs Fog/Clouds)
+            Camera Surveillance (Smoke vs Fog/Clouds)
           </button>
 
           <button 
@@ -146,14 +146,14 @@ export default function App() {
               background: activeTab === 'temporal' ? '#e84118' : '#2f3640', 
               color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' 
             }}>
-            ⏳ Spatial-Temporal ConvLSTM (NetCDF Cubes)
+            Spatial-Temporal ConvLSTM (NetCDF Cubes)
           </button>
         </div>
       </header>
 
       {error && (
         <div style={{ padding: '12px', background: '#c23616', borderRadius: '6px', marginBottom: '16px' }}>
-          ⚠️ {error}
+          Error: {error}
         </div>
       )}
 
@@ -180,7 +180,7 @@ export default function App() {
                       flex: 1, padding: '8px', borderRadius: '4px', border: 'none', cursor: 'pointer', fontWeight: 'bold',
                       background: region === 'india' ? '#00a8ff' : '#485460', color: 'white' 
                     }}>
-                    🇮🇳 India & South Asia
+                    India & South Asia
                   </button>
                   <button 
                     onClick={() => loadNasaSatelliteData('global')}
@@ -189,7 +189,7 @@ export default function App() {
                       flex: 1, padding: '8px', borderRadius: '4px', border: 'none', cursor: 'pointer', fontWeight: 'bold',
                       background: region === 'global' ? '#00a8ff' : '#485460', color: 'white' 
                     }}>
-                    🌍 Global Wildfires
+                    Global Wildfires
                   </button>
                 </div>
               </div>
@@ -248,7 +248,7 @@ export default function App() {
                   <p style={{ margin: '0' }}><strong>Classification:</strong> <span style={{ color: '#ff4757', fontWeight: 'bold' }}>{cameraInference.predicted_class}</span></p>
                   <p style={{ margin: '0' }}><strong>Smoke Confidence:</strong> {(cameraInference.smoke_confidence * 100).toFixed(1)}%</p>
                   <p style={{ margin: '0' }}><strong>Fire Confidence:</strong> {(cameraInference.fire_confidence * 100).toFixed(1)}%</p>
-                  <p style={{ margin: '0' }}><strong>Distractor Check (Clouds/Fog/Dust):</strong> {cameraInference.distractor_detected ? '⚠️ Visually similar clouds/fog present' : '✅ Clear of ambient clouds'}</p>
+                  <p style={{ margin: '0' }}><strong>Distractor Check (Clouds/Fog/Dust):</strong> {cameraInference.distractor_detected ? '[Present] Visually similar clouds or fog identified' : '[Clear] No ambient cloud distractor'}</p>
                   <p style={{ margin: '0' }}><strong>Severity Calculation:</strong> <span style={{ color: '#e67e22', fontWeight: 'bold' }}>{cameraInference.severity}</span></p>
                   <p style={{ margin: '0' }}><strong>Multi-Model Risk Score:</strong> {cameraInference.risk_score.toFixed(2)}</p>
 

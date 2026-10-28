@@ -10,7 +10,7 @@ class AlertEngine:
             loc_str = f"{location_data['lat']}, {location_data['lon']}" if location_data.get('available') else "Unknown Location"
             
             alert = (
-                "🚨 WILDFIRE RISK DETECTED 🚨\n"
+                "[ALERT] WILDFIRE HAZARD DETECTED\n"
                 f"Location: {loc_str}\n"
                 f"Severity: {severity}\n"
                 f"Risk Score: {risk_score:.2f}\n"

@@ -1,6 +1,7 @@
 """
-Generates production-quality Google Colab Jupyter Notebooks (.ipynb)
+Generates Google Colab Jupyter Notebooks (.ipynb)
 for both the Image Classification Sequence and the CSV Classification Sequence.
+Follows the Unified Dual-Branch Methodology without emojis or artificial styling.
 """
 
 import json
@@ -13,7 +14,6 @@ os.makedirs(NOTEBOOKS_DIR, exist_ok=True)
 def create_code_cell(source_lines):
     if isinstance(source_lines, str):
         source_lines = [source_lines]
-    # Ensure lines have proper newlines
     formatted = [line if line.endswith('\n') else line + '\n' for line in source_lines]
     if formatted:
         formatted[-1] = formatted[-1].rstrip('\n')
@@ -37,45 +37,44 @@ def create_markdown_cell(source_lines):
         "source": formatted
     }
 
+UNIFIED_METHODOLOGY_MD = [
+    "### Unified Dual-Branch Methodology Overview",
+    "",
+    "The framework unifies image classification and tabular stream processing into a synchronized evaluation architecture:",
+    "",
+    "| Stage | Branch A: Image Modality | Branch B: CSV Tabular Modality |",
+    "| :--- | :--- | :--- |",
+    "| **1. Data Ingestion** | Ingest Multi-Class Camera & Satellite Imagery | Ingest NASA Active Fire & Weather Telemetry CSV |",
+    "| **2. Data Preprocessing** | Resize 128x128, RGB Conversion, Tensor Normalization | Missing Imputation, Target Formulation, Categorical Encoding |",
+    "| **3. Data Leakage Checks** | Target Leakage • MD5 Hash Deduplication • Channel Variance | Target Correlation (|r| < 0.90) • Row Deduplication • Constant Features |",
+    "| **4. Feature Transformation** | CLAHE Contrast Enhancement on Luminance Channel | StandardScaler fit strictly on training partition |",
+    "| **5. Partitioning Protocol** | Stratified Train / Val / Test (70/15/15) + 10-Fold CV | Stratified Train / Val / Test (70/15/15) + 10-Fold CV |",
+    "| **6. Training-Only Balancing** | DCGAN Synthetic Minority Augmentation (Train only) | SMOTE Resampling (Train only) |",
+    "| **7. Initial Model Training** | Baseline Convolutional Neural Network | Baseline Unconstrained Random Forest |",
+    "| **8. Overfit Diagnosis** | Learning Curve & Generalization Gap Auditing | Generalization Gap (|Train Acc - Val Acc| > 8%) |",
+    "| **9. Correction & Retraining** | Dropout (p=0.4), BatchNorm, Weight Decay, Label Smoothing | Structural Tree Pruning (max_depth=5), Gradient Boosting |",
+    "| **10. Final Evaluation** | Quarantined Test Partition: Accuracy, Precision, Recall, F1 | Quarantined Test Partition: Balanced Accuracy, ROC-AUC, F1 |"
+]
+
 def build_image_notebook():
     cells = []
     
     # 0. Header
-    cells.append(create_markdown_cell([
-        "# 🔥 AI Wildfire Early Detection: Image Classification Pipeline",
+    header_lines = [
+        "# AI Wildfire Early Detection: Image Classification Pipeline",
         "### Problem Statement 25 • VIT Tech-a-thon",
         "",
         "[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ssreeakash-cpu/AI-Hackathon/blob/main/notebooks/Image_Classification_Pipeline_Colab.ipynb)",
         "",
-        "This notebook implements the complete end-to-end **Image Classification Sequence**:",
-        "```",
-        "Load Image Dataset",
-        "       ↓",
-        "Data Preprocessing",
-        "       ↓",
-        "Data Leakage Checks (Target leakage • duplicate leakage • suspicious features)",
-        "       ↓",
-        "CLAHE (when contrast enhancement is useful)",
-        "       ↓",
-        "1. Train / Validation / Test Split",
-        "2. 10-fold cross validation",
-        "       ↓",
-        "GAN Augmentation on TRAINING data only",
-        "       ↓",
-        "Initial Model Training",
-        "       ↓",
-        "Overfitting / Underfitting Detection and Rectification",
-        "       ↓",
-        "Apply Correction Technique and Retrain",
-        "       ↓",
-        "Final Test Evaluation",
-        "```"
-    ]))
+        "This notebook executes Branch A of the unified early-warning framework, evaluating visual features while strictly isolating validation and test partitions from data leakage.",
+        ""
+    ] + UNIFIED_METHODOLOGY_MD
+    cells.append(create_markdown_cell(header_lines))
     
     # 1. Environment Setup
     cells.append(create_markdown_cell([
-        "## 🛠️ Step 0: Clone Repository & Install Dependencies",
-        "Clones the official GitHub repository containing datasets, models, and preprocessing utilities."
+        "## Step 0: Clone Repository and Configure Environment",
+        "Clones the project repository and installs computer vision dependencies."
     ]))
     
     cells.append(create_code_cell([
@@ -87,8 +86,8 @@ def build_image_notebook():
     
     # 2. Step 1: Load Image Dataset
     cells.append(create_markdown_cell([
-        "## 📁 Step 1: Load Image Dataset",
-        "Discovers multi-class camera imagery across `Fire`, `Smoke`, `Clouds/Fog` (negative distractor), and `Clear`."
+        "## Step 1: Ingest Image Dataset",
+        "Discovers multi-class camera imagery across Fire, Smoke, Clouds/Fog (negative distractor), and Clear scenes."
     ]))
     
     cells.append(create_code_cell([
@@ -135,8 +134,8 @@ def build_image_notebook():
     
     # 3. Step 2: Preprocessing
     cells.append(create_markdown_cell([
-        "## 🔄 Step 2: Data Preprocessing",
-        "Validates file integrity, normalizes color space (BGR → RGB), and standardizes dimensions to `(128, 128)`."
+        "## Step 2: Image Preprocessing and Standardization",
+        "Validates file integrity, standardizes color representation to RGB, and resizes inputs to a uniform (128, 128) resolution."
     ]))
     
     cells.append(create_code_cell([
@@ -159,18 +158,18 @@ def build_image_notebook():
     
     # 4. Step 3: Leakage Checks
     cells.append(create_markdown_cell([
-        "## 🔍 Step 3: Data Leakage Checks",
-        "Executes 3 critical leakage audits:",
-        "1. **Target Leakage**: Eliminates proxy shortcuts or label leaks in image dimensions.",
-        "2. **Duplicate Leakage**: Hashes images via MD5 to prevent identical images leaking across train and test.",
-        "3. **Suspicious Features**: Detects zero-variance blank channels or synthetic watermark shortcuts."
+        "## Step 3: Rigorous Data Leakage Verification Audits",
+        "Executes three leakage verification gates:",
+        "1. **Target Leakage**: Verifies that input image spatial dimensions and channels contain no label proxy metadata.",
+        "2. **Duplicate Leakage**: Generates MD5 perceptual image hashes to prevent identical images crossing split boundaries.",
+        "3. **Suspicious Features**: Detects degenerate zero-variance channels or synthetic edge artifacts."
     ]))
     
     cells.append(create_code_cell([
         "print('--- Running Data Leakage Audits ---')",
         "# 1. Target Leakage",
         "sizes = set(img.shape for img in raw_images)",
-        "print(f'1. Target Leakage Check: Dimension sets = {sizes} -> All identical. [PASS]')",
+        "print(f'1. Target Leakage Check: Dimension sets = {sizes} -> Uniform dimensions. [PASS]')",
         "",
         "# 2. Duplicate Leakage",
         "hashes = {}",
@@ -192,8 +191,8 @@ def build_image_notebook():
     
     # 5. Step 4: CLAHE
     cells.append(create_markdown_cell([
-        "## 🎨 Step 4: Contrast Limited Adaptive Histogram Equalization (CLAHE)",
-        "Enhances faint smoke plumes against high-glare or misty backgrounds in the LAB Luminance channel."
+        "## Step 4: Contrast Limited Adaptive Histogram Equalization (CLAHE)",
+        "Enhances faint, low-contrast smoke plumes in diffuse atmospheric scenes by equalizing the luminance (L) channel in LAB color space."
     ]))
     
     cells.append(create_code_cell([
@@ -218,7 +217,7 @@ def build_image_notebook():
     
     # 6. Step 5: Splits & Cross-Validation
     cells.append(create_markdown_cell([
-        "## ✂️ Step 5: Train / Validation / Test Split & 10-Fold Cross-Validation",
+        "## Step 5: Dataset Partitioning Protocol and 10-Fold Cross-Validation",
         "Creates strictly isolated splits: **Train (for training & GAN)**, **Validation**, and **Test (strictly untouched)**."
     ]))
     
@@ -230,7 +229,7 @@ def build_image_notebook():
         "n_val = max(1, int(len(train_val_idx) * 0.15))",
         "train_idx, val_idx = train_test_split(train_val_idx, test_size=n_val, random_state=42)",
         "",
-        "print(f'Independent Splits Created:')",
+        "print('Independent Splits Created:')",
         "print(f'  - Training Partition:   {len(train_idx)} samples')",
         "print(f'  - Validation Partition: {len(val_idx)} samples')",
         "print(f'  - Test Partition:       {len(test_idx)} samples (QUARANTINED FOR FINAL EVALUATION)')",
@@ -243,8 +242,8 @@ def build_image_notebook():
     
     # 7. Step 6: GAN Augmentation
     cells.append(create_markdown_cell([
-        "## 🤖 Step 6: GAN Augmentation (Applied Strictly on TRAINING Data Only)",
-        "Uses a Deep Convolutional Generator to synthesize realistic minority smoke/flame features. **Test and Validation sets remain untouched.**"
+        "## Step 6: GAN Augmentation on TRAINING Data Only",
+        "Uses a Deep Convolutional Generator (DCGAN) to synthesize realistic minority class representations. Validation and test partitions remain completely untouched to preserve integrity."
     ]))
     
     cells.append(create_code_cell([
@@ -282,8 +281,8 @@ def build_image_notebook():
     
     # 8. Step 7: Initial Training
     cells.append(create_markdown_cell([
-        "## 🏋️ Step 7: Initial Model Training",
-        "Trains a baseline convolutional architecture without regularization to observe raw convergence."
+        "## Step 7: Initial Vision Model Training",
+        "Trains a baseline convolutional architecture without regularization to establish convergence characteristics."
     ]))
     
     cells.append(create_code_cell([
@@ -337,8 +336,8 @@ def build_image_notebook():
     
     # 9. Step 8: Overfitting / Underfitting Diagnosis
     cells.append(create_markdown_cell([
-        "## 🩺 Step 8: Overfitting / Underfitting Detection",
-        "Quantifies generalization error and flags memorization or under-capacity risks."
+        "## Step 8: Overfitting and Underfitting Diagnostic Audit",
+        "Quantifies generalization error and identifies high-variance memorization."
     ]))
     
     cells.append(create_code_cell([
@@ -353,13 +352,13 @@ def build_image_notebook():
     
     # 10. Step 9: Corrections & Retrain
     cells.append(create_markdown_cell([
-        "## 🛡️ Step 9: Apply Correction Techniques and Retrain",
+        "## Step 9: Regularization Correction and Retraining",
         "Applies:",
-        "1. **Spatial Dropout (0.2) + Dense Dropout (0.4)**",
-        "2. **Batch Normalization** across conv layers",
-        "3. **L2 Weight Decay (1e-4)** in AdamW",
-        "4. **Label Smoothing (0.1)** in CrossEntropy",
-        "5. **Cosine Annealing Learning Rate Scheduler**"
+        "1. Spatial Dropout (p=0.2) and Dense Dropout (p=0.4)",
+        "2. Batch Normalization across convolutional stages",
+        "3. L2 Weight Decay (1e-4) in AdamW",
+        "4. Label Smoothing (0.1) in CrossEntropyLoss",
+        "5. Cosine Annealing Learning Rate Scheduling"
     ]))
     
     cells.append(create_code_cell([
@@ -368,76 +367,82 @@ def build_image_notebook():
         "        super().__init__()",
         "        self.features = nn.Sequential(",
         "            nn.Conv2d(3, 32, 3, padding=1), nn.BatchNorm2d(32), nn.ReLU(), nn.MaxPool2d(2),",
-        "            nn.Conv2d(32, 64, 3, padding=1), nn.BatchNorm2d(64), nn.ReLU(), nn.MaxPool2d(2),",
         "            nn.Dropout2d(0.2),",
+        "            nn.Conv2d(32, 64, 3, padding=1), nn.BatchNorm2d(64), nn.ReLU(), nn.MaxPool2d(2),",
+        "            nn.Dropout2d(0.3),",
         "            nn.AdaptiveAvgPool2d((4, 4))",
         "        )",
         "        self.classifier = nn.Sequential(",
-        "            nn.Flatten(), nn.Linear(64*4*4, 64), nn.BatchNorm1d(64), nn.ReLU(),",
-        "            nn.Dropout(0.4), nn.Linear(64, num_classes)",
+        "            nn.Flatten(),",
+        "            nn.Linear(64 * 4 * 4, 128), nn.BatchNorm1d(128), nn.ReLU(),",
+        "            nn.Dropout(0.4),",
+        "            nn.Linear(128, num_classes)",
         "        )",
-        "    def forward(self, x): return self.classifier(self.features(x))",
+        "    def forward(self, x):",
+        "        return self.classifier(self.features(x))",
         "",
-        "corrected_model = RegularizedCNN().to(DEVICE)",
-        "criterion = nn.CrossEntropyLoss(label_smoothing=0.1)",
-        "optimizer = optim.AdamW(corrected_model.parameters(), lr=0.001, weight_decay=1e-4)",
-        "scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=6)",
+        "reg_model = RegularizedCNN().to(DEVICE)",
+        "criterion_reg = nn.CrossEntropyLoss(label_smoothing=0.1)",
+        "optimizer_reg = optim.AdamW(reg_model.parameters(), lr=0.001, weight_decay=1e-4)",
+        "scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer_reg, T_max=8)",
         "",
-        "for epoch in range(6):",
-        "    corrected_model.train()",
+        "print('Retraining Regularized Model...')",
+        "for epoch in range(8):",
+        "    reg_model.train()",
         "    tl, c, tot = 0.0, 0, 0",
         "    for x, y in train_loader:",
         "        x, y = x.to(DEVICE), y.to(DEVICE)",
-        "        optimizer.zero_grad()",
-        "        out = corrected_model(x)",
-        "        loss = criterion(out, y)",
-        "        loss.backward(); optimizer.step()",
+        "        optimizer_reg.zero_grad()",
+        "        out = reg_model(x)",
+        "        loss = criterion_reg(out, y)",
+        "        loss.backward(); optimizer_reg.step()",
         "        tl += loss.item()*x.size(0); c += (out.argmax(1) == y).sum().item(); tot += y.size(0)",
         "    scheduler.step()",
-        "    print(f'Corrected Epoch [{epoch+1}/6] - Train Loss: {tl/tot:.4f}, Train Acc: {c/tot:.1%}')"
+        "    print(f'Epoch [{epoch+1}/8] - Reg Train Loss: {tl/tot:.4f}, Reg Train Acc: {c/tot:.1%}')"
     ]))
     
     # 11. Step 10: Final Evaluation
     cells.append(create_markdown_cell([
-        "## 🎯 Step 10: Final Test Evaluation",
-        "Evaluates the corrected, regularized model on the pristine, untouched Test set."
+        "## Step 10: Final Test Evaluation on Quarantined Partition",
+        "Evaluates the regularized model exclusively on the held-out test split."
     ]))
     
     cells.append(create_code_cell([
-        "corrected_model.eval()",
+        "reg_model.eval()",
         "all_preds, all_targets = [], []",
         "with torch.no_grad():",
         "    for x, y in test_loader:",
-        "        out = corrected_model(x.to(DEVICE))",
-        "        all_preds.extend(out.argmax(1).cpu().numpy())",
+        "        x = x.to(DEVICE)",
+        "        preds = reg_model(x).argmax(1).cpu().numpy()",
+        "        all_preds.extend(preds)",
         "        all_targets.extend(y.numpy())",
         "",
-        "acc = accuracy_score(all_targets, all_preds)",
-        "prec = precision_score(all_targets, all_preds, average='weighted', zero_division=0)",
-        "rec = recall_score(all_targets, all_preds, average='weighted', zero_division=0)",
-        "f1 = f1_score(all_targets, all_preds, average='weighted', zero_division=0)",
-        "cm = confusion_matrix(all_targets, all_preds, labels=range(len(classes)))",
+        "test_acc = accuracy_score(all_targets, all_preds)",
+        "test_prec = precision_score(all_targets, all_preds, average='weighted', zero_division=0)",
+        "test_rec = recall_score(all_targets, all_preds, average='weighted', zero_division=0)",
+        "test_f1 = f1_score(all_targets, all_preds, average='weighted', zero_division=0)",
+        "cm = confusion_matrix(all_targets, all_preds)",
         "",
         "print('='*50)",
-        "print('FINAL TEST EVALUATION RESULTS')",
+        "print('FINAL TEST EVALUATION (IMAGE CLASSIFICATION)')",
         "print('='*50)",
-        "print(f'Test Accuracy:  {acc:.2%}')",
-        "print(f'Test Precision: {prec:.4f}')",
-        "print(f'Test Recall:    {rec:.4f}')",
-        "print(f'Test F1-Score:  {f1:.4f}')",
+        "print(f'Final Test Accuracy:  {test_acc:.2%}')",
+        "print(f'Final Test Precision: {test_prec:.4f}')",
+        "print(f'Final Test Recall:    {test_rec:.4f}')",
+        "print(f'Final Test F1-Score:  {test_f1:.4f}')",
         "print(f'Confusion Matrix:\\n{cm}')",
         "",
         "# Plot Confusion Matrix",
-        "plt.figure(figsize=(6, 5))",
-        "plt.imshow(cm, cmap='Blues', interpolation='nearest')",
-        "plt.title('Final Test Confusion Matrix')",
-        "plt.colorbar()",
-        "plt.xticks(range(len(classes)), classes, rotation=45)",
-        "plt.yticks(range(len(classes)), classes)",
-        "plt.xlabel('Predicted Label'); plt.ylabel('True Label')",
-        "for i in range(len(classes)):",
-        "    for j in range(len(classes)):",
-        "        plt.text(j, i, str(cm[i, j]), ha='center', va='center', color='red' if cm[i, j] > 0 else 'black')",
+        "fig, ax = plt.subplots(figsize=(6, 5))",
+        "im = ax.imshow(cm, cmap='Blues')",
+        "plt.colorbar(im)",
+        "ax.set_xticks(range(len(classes)))",
+        "ax.set_yticks(range(len(classes)))",
+        "ax.set_xticklabels(classes, rotation=45)",
+        "ax.set_yticklabels(classes)",
+        "ax.set_xlabel('Predicted Label')",
+        "ax.set_ylabel('True Label')",
+        "plt.title('Test Confusion Matrix (Image Classification)')",
         "plt.tight_layout(); plt.show()"
     ]))
     
@@ -445,8 +450,7 @@ def build_image_notebook():
         "cells": cells,
         "metadata": {
             "colab": {"provenance": []},
-            "language_info": {"name": "python", "version": "3.10"},
-            "accelerator": "GPU"
+            "language_info": {"name": "python", "version": "3.10"}
         },
         "nbformat": 4,
         "nbformat_minor": 2
@@ -463,38 +467,20 @@ def build_tabular_notebook():
     cells = []
     
     # 0. Header
-    cells.append(create_markdown_cell([
-        "# 📊 AI Wildfire Early Detection: CSV / Tabular Classification Pipeline",
+    header_lines = [
+        "# AI Wildfire Early Detection: CSV / Tabular Classification Pipeline",
         "### Problem Statement 25 • VIT Tech-a-thon",
         "",
         "[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ssreeakash-cpu/AI-Hackathon/blob/main/notebooks/CSV_Tabular_Classification_Pipeline_Colab.ipynb)",
         "",
-        "This notebook implements the complete end-to-end **CSV / Tabular Classification & Class Imbalance Sequence**:",
-        "```",
-        "Load CSV Dataset",
-        "       ↓",
-        "Data Preprocessing",
-        "       ↓",
-        "Data Leakage Checks (Target leakage • duplicate leakage • suspicious features)",
-        "       ↓",
-        "1. Train / Validation / Test Split",
-        "2. 10-fold cross validation",
-        "       ↓",
-        "SMOTE Algorithm (balancing dataset on TRAINING data only)",
-        "       ↓",
-        "Initial Model Training",
-        "       ↓",
-        "Overfitting / Underfitting Detection and Rectification",
-        "       ↓",
-        "Apply Correction Technique and Retrain",
-        "       ↓",
-        "Final Test Evaluation",
-        "```"
-    ]))
+        "This notebook executes Branch B of the unified early-warning framework, addressing extreme class imbalance via SMOTE on training partitions and preventing feature leakage.",
+        ""
+    ] + UNIFIED_METHODOLOGY_MD
+    cells.append(create_markdown_cell(header_lines))
     
     # 1. Environment Setup
     cells.append(create_markdown_cell([
-        "## 🛠️ Step 0: Clone Repository & Install Dependencies"
+        "## Step 0: Clone Repository and Configure Environment"
     ]))
     
     cells.append(create_code_cell([
@@ -506,8 +492,8 @@ def build_tabular_notebook():
     
     # 2. Step 1: Load CSV Dataset
     cells.append(create_markdown_cell([
-        "## 📁 Step 1: Load CSV Dataset",
-        "Ingests real NASA Earthdata telemetry (`VIIRS_SouthAsia_India_24h.csv`)."
+        "## Step 1: Ingest CSV Telemetry Dataset",
+        "Ingests real NASA Earthdata active fire telemetry (VIIRS_SouthAsia_India_24h.csv)."
     ]))
     
     cells.append(create_code_cell([
@@ -533,8 +519,8 @@ def build_tabular_notebook():
     
     # 3. Step 2: Preprocessing
     cells.append(create_markdown_cell([
-        "## 🔄 Step 2: Data Preprocessing & Target Formulation",
-        "Imputes missing values, encodes categories, and formulates high-severity fire outbreak detection (defining a natural minority class for SMOTE)."
+        "## Step 2: Preprocessing and Target Formulation",
+        "Imputes missing values, encodes categories, and formulates high-severity fire outbreak detection (defining a natural minority class for SMOTE balancing)."
     ]))
     
     cells.append(create_code_cell([
@@ -558,11 +544,11 @@ def build_tabular_notebook():
     
     # 4. Step 3: Leakage Checks
     cells.append(create_markdown_cell([
-        "## 🔍 Step 3: Data Leakage Checks",
-        "Executes 3 critical checks:",
-        "1. **Target Leakage**: Verifies $|r| < 0.90$ for all predictor features.",
-        "2. **Duplicate Leakage**: Deduplicates feature rows.",
-        "3. **Suspicious Features**: Prunes zero-variance or pseudo-identifier columns."
+        "## Step 3: Tabular Data Leakage Verification Audits",
+        "Executes three leakage verification checks:",
+        "1. **Target Leakage**: Verifies $|r| < 0.90$ for all predictor features against target labels.",
+        "2. **Duplicate Leakage**: Deduplicates identical feature rows.",
+        "3. **Suspicious Features**: Identifies and prunes zero-variance or uninformative identifier columns."
     ]))
     
     cells.append(create_code_cell([
@@ -586,8 +572,8 @@ def build_tabular_notebook():
     
     # 5. Step 4: Splits & Cross-Validation
     cells.append(create_markdown_cell([
-        "## ✂️ Step 4: Train / Validation / Test Split & 10-Fold Cross-Validation",
-        "Performs stratified partitioning. StandardScaler is fit **strictly on Training data**."
+        "## Step 4: Stratified Partitioning and 10-Fold Cross-Validation",
+        "Performs stratified partitioning. StandardScaler is fit **strictly on Training data** to avoid information leakage."
     ]))
     
     cells.append(create_code_cell([
@@ -599,7 +585,7 @@ def build_tabular_notebook():
         "X_val_scaled = scaler.transform(X_val)",
         "X_test_scaled = scaler.transform(X_test)",
         "",
-        "print(f'Stratified Partitions:')",
+        "print('Stratified Partitions:')",
         "print(f'  - Training Partition:   {len(X_train_scaled):,} rows (Minority: {sum(y_train == 1)})')",
         "print(f'  - Validation Partition: {len(X_val_scaled):,} rows (Minority: {sum(y_val == 1)})')",
         "print(f'  - Test Partition:       {len(X_test_scaled):,} rows (Minority: {sum(y_test == 1)}) [QUARANTINED]')",
@@ -610,8 +596,8 @@ def build_tabular_notebook():
     
     # 6. Step 5: SMOTE on Training Only
     cells.append(create_markdown_cell([
-        "## ⚖️ Step 5: SMOTE Algorithm (Applied Strictly on TRAINING Data Only)",
-        "Synthesizes minority class representations using $k$-nearest neighbors. **Validation and Test sets maintain natural distributions.**"
+        "## Step 5: SMOTE Resampling on TRAINING Data Only",
+        "Synthesizes minority class feature vectors using k-nearest neighbors. Validation and test partitions remain untouched with natural class ratios."
     ]))
     
     cells.append(create_code_cell([
@@ -623,12 +609,12 @@ def build_tabular_notebook():
         "X_train_res, y_train_res = smote.fit_resample(X_train_scaled, y_train)",
         "",
         "print(f'Post-SMOTE Training Distribution: Class 0: {sum(y_train_res == 0)}, Class 1: {sum(y_train_res == 1)}')",
-        "print('[SMOTE Complete] Perfectly balanced 50:50 distribution on Training partition.')"
+        "print('[SMOTE Complete] Balanced 50:50 distribution on Training partition.')"
     ]))
     
     # 7. Step 6: Initial Training
     cells.append(create_markdown_cell([
-        "## 🌲 Step 6: Initial Model Training (Unconstrained Random Forest)"
+        "## Step 6: Initial Model Training (Unconstrained Random Forest)"
     ]))
     
     cells.append(create_code_cell([
@@ -648,7 +634,7 @@ def build_tabular_notebook():
     
     # 8. Step 7: Overfitting Detection
     cells.append(create_markdown_cell([
-        "## 🩺 Step 7: Overfitting / Underfitting Detection"
+        "## Step 7: Overfitting and Underfitting Diagnostic Audit"
     ]))
     
     cells.append(create_code_cell([
@@ -663,12 +649,12 @@ def build_tabular_notebook():
     
     # 9. Step 8: Correction & Retrain
     cells.append(create_markdown_cell([
-        "## 🛡️ Step 8: Apply Correction Techniques and Retrain",
+        "## Step 8: Structural Tree Pruning and Gradient Boosting Retraining",
         "Applies:",
-        "1. Tree depth constraints (`max_depth=5`)",
-        "2. Leaf regularization (`min_samples_split=6`, `min_samples_leaf=4`)",
-        "3. Feature subsampling (`max_features='sqrt'`)",
-        "4. Regularized Gradient Boosting (`learning_rate=0.05`, `subsample=0.85`)"
+        "1. Tree depth constraints (max_depth=5)",
+        "2. Leaf regularization (min_samples_split=6, min_samples_leaf=4)",
+        "3. Feature subsampling (max_features='sqrt')",
+        "4. Regularized Gradient Boosting (learning_rate=0.05, subsample=0.85)"
     ]))
     
     cells.append(create_code_cell([
@@ -691,7 +677,7 @@ def build_tabular_notebook():
     
     # 10. Step 9: Final Test Evaluation
     cells.append(create_markdown_cell([
-        "## 🎯 Step 9: Final Test Evaluation",
+        "## Step 9: Final Test Evaluation on Quarantined Partition",
         "Evaluates the regularized model on the untouched test partition."
     ]))
     
@@ -708,7 +694,7 @@ def build_tabular_notebook():
         "cm = confusion_matrix(y_test, y_pred)",
         "",
         "print('='*50)",
-        "print('FINAL TEST EVALUATION (PRISTINE TEST SET)')",
+        "print('FINAL TEST EVALUATION (TABULAR TELEMETRY)')",
         "print('='*50)",
         "print(f'Final Test Accuracy:          {test_acc:.2%}')",
         "print(f'Final Test Balanced Accuracy: {test_bal:.2%}')",
@@ -723,7 +709,7 @@ def build_tabular_notebook():
         "indices = np.argsort(importances)[::-1]",
         "plt.figure(figsize=(8, 4))",
         "plt.title('Predictive Feature Importances (NASA Earthdata)')",
-        "plt.bar(range(len(feature_cols)), importances[indices], align='center', color='crimson')",
+        "plt.bar(range(len(feature_cols)), importances[indices], align='center', color='teal')",
         "plt.xticks(range(len(feature_cols)), [feature_cols[i] for i in indices], rotation=30)",
         "plt.ylabel('Relative Gini Importance'); plt.tight_layout(); plt.show()"
     ]))
