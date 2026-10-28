@@ -5,6 +5,16 @@
 
 ---
 
+## 🚀 One-Click Google Colab Notebooks
+Run both complete end-to-end pipelines directly in your browser with zero local setup:
+
+| Pipeline | Google Colab Interactive Runner | Architecture & Workflow |
+| :--- | :---: | :--- |
+| **Image Classification Pipeline** | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ssreeakash-cpu/AI-Hackathon/blob/main/notebooks/Image_Classification_Pipeline_Colab.ipynb) | Load $\to$ Preprocess $\to$ Leakage Checks $\to$ **CLAHE** $\to$ Splits/10-Fold CV $\to$ **GAN Augmentation (Train only)** $\to$ Initial Train $\to$ Overfit Diagnosis $\to$ **Dropout/BatchNorm/WeightDecay/Smoothing Rectification** $\to$ Final Test Evaluation |
+| **CSV / Tabular Classification Pipeline** | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ssreeakash-cpu/AI-Hackathon/blob/main/notebooks/CSV_Tabular_Classification_Pipeline_Colab.ipynb) | Load $\to$ Preprocess $\to$ Leakage Checks $\to$ Splits/10-Fold CV $\to$ **SMOTE Algorithm (Train only)** $\to$ Initial Train $\to$ Overfit Diagnosis $\to$ **Tree Pruning/Gradient Boosting Rectification** $\to$ Final Test Evaluation |
+
+---
+
 ## 📌 Project Overview
 This repository implements an end-to-end, multi-modal **Spatial-Temporal AI Wildfire Early-Warning Monitoring System** capable of:
 1. Detecting early-stage wildfire ignition and smoke plumes from both **satellite imagery** and **ground surveillance cameras**.
