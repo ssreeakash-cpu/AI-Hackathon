@@ -7,10 +7,11 @@
 
 ## Interactive Google Colab Notebooks
 
-Both modular pipelines are fully executable directly in Google Colab with isolated environments and reproducible workflows:
+All pipelines are directly executable in Google Colab with preconfigured dependencies and self-contained execution flows:
 
 | Pipeline | Google Colab Interactive Notebook | Execution Sequence |
 | :--- | :---: | :--- |
+| **Unified Multimodal Pipeline (Master)** | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ssreeakash-cpu/AI-Hackathon/blob/main/notebooks/Unified_Multimodal_Pipeline_Colab.ipynb) | **Merged Dual-Branch Workflow**: Multi-Modality Ingestion $\to$ Leakage Audits $\to$ CLAHE / Scaling $\to$ Splits/10-Fold CV $\to$ **DCGAN & SMOTE (Train only)** $\to$ Dual Baseline Training $\to$ Overfit Diagnosis $\to$ Regularization Retrain $\to$ Dual Test Evaluation $\to$ **Multimodal Late-Fusion Decision Dispatch** |
 | **Image Classification Pipeline** | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ssreeakash-cpu/AI-Hackathon/blob/main/notebooks/Image_Classification_Pipeline_Colab.ipynb) | Image Ingestion $\to$ Preprocessing $\to$ Leakage Audits $\to$ **CLAHE** $\to$ Stratified Splits/10-Fold CV $\to$ **DCGAN Augmentation (Train partition only)** $\to$ Initial CNN $\to$ Overfit Diagnosis $\to$ **Dropout/BatchNorm/WeightDecay Regularization** $\to$ Isolated Test Evaluation |
 | **CSV / Tabular Telemetry Pipeline** | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ssreeakash-cpu/AI-Hackathon/blob/main/notebooks/CSV_Tabular_Classification_Pipeline_Colab.ipynb) | CSV Ingestion $\to$ Preprocessing $\to$ Leakage Audits $\to$ Stratified Splits/10-Fold CV $\to$ **SMOTE Resampling (Train partition only)** $\to$ Initial Random Forest $\to$ Overfit Diagnosis $\to$ **Structural Tree Pruning & Gradient Boosting Retrain** $\to$ Isolated Test Evaluation |
 
