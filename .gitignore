@@ -28,8 +28,11 @@ routee-powertrain-main.zip
 # WhatsApp Zips & Temporary Exports
 all_6_wildfire_datasets.zip
 whatsapp_dataset_zips/
-*.pdf
+test.pdf
 crop_*.png
+
+# Allow IEEE papers
+!ieee_papers/*.pdf
 
 # OS artifacts
 .DS_Store
