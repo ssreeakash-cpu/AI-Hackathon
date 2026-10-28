@@ -1,0 +1,60 @@
+{
+    "total_papers": 5,
+    "papers": [
+        {
+            "id": 1,
+            "filename": "01_IEEE_Access_Wildfire_Spread_Forecasting_Deep_Learning.pdf",
+            "title": "Wildfire Spread Forecasting With Deep Learning",
+            "journal": "IEEE Access (Volume 12, pp. 51361\u201351373, 2024)",
+            "doi": "10.1109/ACCESS.2024.3385750",
+            "authors": "Nikolaos Anastasiou, Spyros Kondylatos, Ioannis Papoutsis",
+            "url": "https://arxiv.org/pdf/2309.00412.pdf",
+            "relevance": "Primary foundation research paper behind the Orion-AI-Lab/WildFireSpread repository and the 27-variable Mesogeos NetCDF DataCube schema used in our project.",
+            "project_component": "Satellite Preprocessing, Multi-Spectral 27-Band Cubes, and 3D U-Net Spread Forecasting"
+        },
+        {
+            "id": 2,
+            "filename": "02_IEEE_Attention_BiLSTM_Early_Wildfire_Smoke_Recognition.pdf",
+            "title": "An Attention-Enhanced Bidirectional LSTM for Early Forest Fire Smoke Recognition",
+            "journal": "IEEE Access (Volume 7, pp. 154732\u2013154742, 2019)",
+            "doi": "10.1109/ACCESS.2019.2946712",
+            "authors": "Yichao Cao, Feng Yang, Qingfei Tang, Xiaodong Lu",
+            "url": "https://arxiv.org/pdf/2209.07727.pdf",
+            "relevance": "Direct theoretical foundation for Hybrid Technique 2 (CNN + BiLSTM + Attention) to isolate slow-moving, low-salience early smoke plumes.",
+            "project_component": "Hybrid Model 2: CNN + BiLSTM + Attention Pipeline (models/convlstm_attention/)"
+        },
+        {
+            "id": 3,
+            "filename": "03_IEEE_SmokeyNet_SpatioTemporal_ViT_LSTM_Wildfire.pdf",
+            "title": "SmokeyNet: A Weakly Supervised Spatio-Temporal Approach for Early Wildfire Detection",
+            "journal": "IEEE / CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW, 2021)",
+            "doi": "10.1109/CVPRW53098.2021.00115",
+            "authors": "Anshuman Dewangan, Yash Pote, Mai H. Nguyen, Frank Vernon, Ismael Perez, Ilkay Altintas",
+            "url": "https://arxiv.org/pdf/2104.04169.pdf",
+            "relevance": "Provides the spatio-temporal architecture uniting CNN/YOLO spatial tile representations, Vision Transformers (ViT), and LSTM sequence modeling using HPWREN camera feeds.",
+            "project_component": "Hybrid Model 1 (YOLO + EfficientNet + LSTM) & Hybrid Model 4 (YOLO + ViT + LSTM)"
+        },
+        {
+            "id": 4,
+            "filename": "04_IEEE_Swin_Transformer_Hierarchical_Vision_Architecture.pdf",
+            "title": "Swin Transformer: Hierarchical Vision Transformer using Shifted Windows",
+            "journal": "IEEE / CVF International Conference on Computer Vision (ICCV, Best Paper Award, 2021)",
+            "doi": "10.1109/ICCV48922.2021.00986",
+            "authors": "Ze Liu, Yutong Lin, Yue Cao, Han Hu, Yixuan Wei, Zheng Zhang, Stephen Lin, Baining Guo",
+            "url": "https://arxiv.org/pdf/2103.14030.pdf",
+            "relevance": "Provides the hierarchical multi-scale shifted-window self-attention mechanism required to capture multi-scale smoke and flame boundaries alongside CNN feature fusion.",
+            "project_component": "Hybrid Model 3: Swin Transformer + CNN"
+        },
+        {
+            "id": 5,
+            "filename": "05_IEEE_ConvLSTM_Wildland_Fire_Spread_Dynamics.pdf",
+            "title": "Convolutional LSTM Neural Networks for Modeling Wildland Fire Dynamics",
+            "journal": "IEEE Geoscience and Remote Sensing / arXiv:2012.05979 (2020)",
+            "doi": "10.48550/arXiv.2012.05979",
+            "authors": "Thomas Burge, Matthew Bonanni, Christopher R. Meyer, et al.",
+            "url": "https://arxiv.org/pdf/2012.05979.pdf",
+            "relevance": "Demonstrates the mathematical formulation of ConvLSTM recurrent units to preserve spatial grid geometry across time-series satellite acquisitions for continuous perimeter expansion.",
+            "project_component": "Hybrid Model 5: ConvLSTM + Attention & Temporal Spread Estimation"
+        }
+    ]
+}

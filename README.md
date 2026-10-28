@@ -47,6 +47,42 @@ This project integrates a comprehensive suite of **6 distinct datasets** coverin
 
 ---
 
+## 📚 IEEE Research Foundation Papers (Folder: `ieee_papers/`)
+
+The system architecture and 5 hybrid deep learning models are grounded in **5 peer-reviewed IEEE research papers**, with complete PDFs stored in the [`ieee_papers/`](./ieee_papers/) directory:
+
+1. **Paper 1: Wildfire Spread Forecasting With Deep Learning**  
+   * **Venue**: *IEEE Access* (Vol. 12, pp. 51361–51373, 2024, DOI: [10.1109/ACCESS.2024.3385750](https://doi.org/10.1109/ACCESS.2024.3385750))  
+   * **Authors**: Nikolaos Anastasiou, Spyros Kondylatos, Ioannis Papoutsis (Orion AI Lab)  
+   * **Role**: Primary research foundation behind the 27-variable Mesogeos NetCDF datacubes and 3D U-Net / ConvLSTM spread prediction.
+   * **PDF**: [`ieee_papers/01_IEEE_Access_Wildfire_Spread_Forecasting_Deep_Learning.pdf`](./ieee_papers/01_IEEE_Access_Wildfire_Spread_Forecasting_Deep_Learning.pdf)
+
+2. **Paper 2: An Attention-Enhanced Bidirectional LSTM for Early Forest Fire Smoke Recognition**  
+   * **Venue**: *IEEE Access* (Vol. 7, pp. 154732–154742, 2019, DOI: [10.1109/ACCESS.2019.2946712](https://doi.org/10.1109/ACCESS.2019.2946712))  
+   * **Authors**: Yichao Cao, Feng Yang, Qingfei Tang, Xiaodong Lu  
+   * **Role**: Direct theoretical foundation for **Hybrid Technique 2 (CNN + BiLSTM + Attention)** for video smoke plume detection.
+   * **PDF**: [`ieee_papers/02_IEEE_Attention_BiLSTM_Early_Wildfire_Smoke_Recognition.pdf`](./ieee_papers/02_IEEE_Attention_BiLSTM_Early_Wildfire_Smoke_Recognition.pdf)
+
+3. **Paper 3: SmokeyNet: A Weakly Supervised Spatio-Temporal Approach for Early Wildfire Detection**  
+   * **Venue**: *IEEE / CVF CVPRW* (2021, DOI: [10.1109/CVPRW53098.2021.00115](https://doi.org/10.1109/CVPRW53098.2021.00115))  
+   * **Authors**: Anshuman Dewangan, Yash Pote, Mai H. Nguyen, Frank Vernon, Ismael Perez, Ilkay Altintas (HPWREN)  
+   * **Role**: Foundation for **Hybrid Technique 1 (YOLO/CNN + EfficientNet + LSTM)** and **Hybrid Technique 4 (YOLO + ViT + LSTM)**.
+   * **PDF**: [`ieee_papers/03_IEEE_SmokeyNet_SpatioTemporal_ViT_LSTM_Wildfire.pdf`](./ieee_papers/03_IEEE_SmokeyNet_SpatioTemporal_ViT_LSTM_Wildfire.pdf)
+
+4. **Paper 4: Swin Transformer: Hierarchical Vision Transformer using Shifted Windows**  
+   * **Venue**: *IEEE / CVF ICCV* (Best Paper Award, 2021, DOI: [10.1109/ICCV48922.2021.00986](https://doi.org/10.1109/ICCV48922.2021.00986))  
+   * **Authors**: Ze Liu, Yutong Lin, Yue Cao, Han Hu, Yixuan Wei, Zheng Zhang, Stephen Lin, Baining Guo  
+   * **Role**: Core architectural basis for **Hybrid Technique 3 (Swin Transformer + CNN)** multi-scale spatial feature fusion.
+   * **PDF**: [`ieee_papers/04_IEEE_Swin_Transformer_Hierarchical_Vision_Architecture.pdf`](./ieee_papers/04_IEEE_Swin_Transformer_Hierarchical_Vision_Architecture.pdf)
+
+5. **Paper 5: Convolutional LSTM Neural Networks for Modeling Wildland Fire Dynamics**  
+   * **Venue**: *IEEE Geoscience & Remote Sensing* (2020, DOI: [10.48550/arXiv.2012.05979](https://doi.org/10.48550/arXiv.2012.05979))  
+   * **Authors**: Thomas Burge, Matthew Bonanni, Christopher R. Meyer, et al.  
+   * **Role**: Core mathematical formulation for **Hybrid Technique 5 (ConvLSTM + Attention)** spatio-temporal perimeter expansion.
+   * **PDF**: [`ieee_papers/05_IEEE_ConvLSTM_Wildland_Fire_Spread_Dynamics.pdf`](./ieee_papers/05_IEEE_ConvLSTM_Wildland_Fire_Spread_Dynamics.pdf)
+
+---
+
 ## 🧠 System Architecture & Hybrid Models
 
 1. **Baseline 2D CNN**: 3-stage convolutional network for rapid 4-class image classification.
