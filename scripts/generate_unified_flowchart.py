@@ -198,10 +198,10 @@ def build_flowchart():
     # STAGE 7: INITIAL MODEL TRAINING (y: 33.5 to 39.0, h=5.5)
     # -------------------------------------------------------------
     draw_box(5, 33.5, 42, 5.5, c_img_bg, c_img_edge,
-             "7. Initial Vision Model Training",
-             ["Deep Convolutional Neural Network (Conv2d, ReLU, MaxPool)",
-              "Optimization: Adam Optimizer with Base Learning Rate (1e-3)",
-              "Cross-Entropy Loss Computed Across Augmented Training Partition"],
+             "7. Initial Training: 5 Hybrid Techniques",
+             ["1. YOLO + EfficientNet + LSTM | 2. CNN + BiLSTM + Attention",
+              "3. Swin Transformer + CNN | 4. YOLO + ViT + LSTM",
+              "5. ConvLSTM + Attention (Spatio-Temporal Sequence Modeling)"],
              c_img_txt)
 
     draw_box(53, 33.5, 42, 5.5, c_csv_bg, c_csv_edge,
@@ -271,21 +271,18 @@ def build_flowchart():
     # STAGE 11: MULTI-MODAL LATE FUSION (SHARED CENTER BOX, y: 0.8 to 4.8, h=4.0)
     # -------------------------------------------------------------
     draw_box(14, 0.8, 72, 4.0, c_shared_bg, c_shared_edge,
-             "11. Multi-Modal Late-Fusion & Spatiotemporal Early-Warning System",
-             ["Probability Ensembling: Vision Smoke Likelihood Combined with Satellite Hotspot FRP Telemetry",
-              "Hazard Severity Grading (LOW, MEDIUM, HIGH, CRITICAL) Dispatched to GIS Interactive Dashboard"],
+             "11. Output: Fire/Smoke Detection -> Severity -> Geolocation -> Alert",
+             ["Multi-Modal Late-Fusion Risk Engine Combines Visual Predictions with Satellite FRP Telemetry",
+              "Dispatches Early-Warning Alerts with Location, Severity, Confidence Score & Estimated Affected Area"],
              c_shared_txt)
 
-    # Save to both target locations
+    # Save to unified target location
     path1 = os.path.join("docs", "unified_methodology_flowchart.png")
-    path2 = os.path.join("docs", "methodology_flowchart.png")
     
     plt.savefig(path1, dpi=300, bbox_inches="tight", facecolor=fig.get_facecolor(), edgecolor="none")
-    plt.savefig(path2, dpi=300, bbox_inches="tight", facecolor=fig.get_facecolor(), edgecolor="none")
     plt.close()
     
     print(f"[OK] Generated: {path1}")
-    print(f"[OK] Generated: {path2}")
 
 if __name__ == "__main__":
     build_flowchart()

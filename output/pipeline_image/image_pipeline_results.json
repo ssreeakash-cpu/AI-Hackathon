@@ -1,9 +1,9 @@
 {
     "pipeline": "Image Classification with CLAHE, GAN Augmentation & Overfit Rectification",
-    "test_accuracy": 1.0,
+    "test_accuracy": 0.75,
     "test_precision": 1.0,
-    "test_recall": 1.0,
-    "test_f1_score": 1.0,
+    "test_recall": 0.75,
+    "test_f1_score": 0.8333333333333333,
     "confusion_matrix": [
         [
             0,
@@ -12,8 +12,8 @@
             0
         ],
         [
-            0,
-            2,
+            1,
+            1,
             0,
             0
         ],

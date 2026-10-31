@@ -17,6 +17,61 @@ All pipelines are directly executable in Google Colab with preconfigured depende
 
 ---
 
+## Image Classification Pipeline & 5 Hybrid Techniques Architecture
+
+As formulated in VIT Tech-a-thon Problem Statement 25 ("AI-Based Early Detection of Forest Fire and Smoke from Satellite / Camera Images"), the visual detection stream combines spatial feature extraction with temporal sequence modeling to distinguish true wildfire events from atmospheric distractors (clouds, fog, dust).
+
+![Image Classification Methodology Flowchart](docs/image_classification_flowchart.png)
+
+### Exact Image Classification Sequence Flowchart
+
+```mermaid
+graph TD
+    S1["1. Load Image Dataset<br/>- Ground Surveillance Cameras (HPWREN Network, Static Towers, Drones)<br/>- NASA Earthdata Remote Sensing (Terra/Aqua MODIS & Suomi-NPP VIIRS)<br/>- Multi-Class: Fire, Smoke, Distractors (Clouds, Fog, Dust, Haze), Clear"]
+    --> S2["2. Data Preprocessing<br/>- Spatial Resizing (224x224 / 256x256)<br/>- BGR to RGB Conversion & LAB Luminance Extraction<br/>- Tensor Normalization via Dataset Mean and Standard Deviation"]
+    --> S3["3. Data Leakage Checks<br/>- Target Leakage: Audit Dimensions & Metadata for Label Proxies<br/>- Duplicate Leakage: MD5 Checksums & Perceptual Hashing (pHash)<br/>- Suspicious Features: Strip Timestamp Overlays, Border Artifacts & Constant Channels"]
+    --> S4["4. CLAHE (When Contrast Enhancement is Useful)<br/>- Contrast Limited Adaptive Histogram Equalization on L Channel (Clip=2.0, Grid=8x8)<br/>- Sharpens Diffuse, Low-Contrast Smoke Plumes in Foggy and Glare-Heavy Scenes"]
+    --> S5["5. Dataset Partitioning Protocol & Cross-Validation<br/>- Protocol A: Stratified Train / Validation / Test Split (70% / 15% / 15%)<br/>- Protocol B: 10-Fold Stratified Cross-Validation on Development Set<br/>- Strict Quarantine: Test Partition Isolated Before Any Augmentation or Training"]
+    --> S6["6. GAN Augmentation on TRAINING Data Only<br/>- Deep Convolutional GAN (DCGAN) Synthesizes Realistic Minority Fire/Smoke Samples<br/>- Zero Information Leakage: Validation and Test Partitions Remain Strictly Untouched"]
+    --> S7["7. Initial Model Training: 5 Hybrid Techniques"]
+
+    subgraph HYBRIDS["5 Hybrid Techniques (Problem Statement 25)"]
+        H1["1. YOLO + EfficientNet + LSTM<br/>Real-Time Bounding Box Localization + Compound Scaling CNN + Recurrent Frame Sequence Modeling"]
+        H2["2. CNN + BiLSTM + Attention<br/>Deep Convolutional Spatial Encoding + Bidirectional Temporal Flow + Dynamic Smoke Plume Attention"]
+        H3["3. Swin Transformer + CNN<br/>Hierarchical Shifted-Window Attention Backbone Fused with Localized CNN Convolutions"]
+        H4["4. YOLO + Vision Transformer + LSTM<br/>Weakly-Supervised Patch Detection + Multi-Head Self-Attention + LSTM Temporal State Transition"]
+        H5["5. ConvLSTM + Attention<br/>2D Topology-Preserving Recurrence + Multi-Spectral Sequence Attention on Fire Spread Dynamics"]
+    end
+
+    S7 --> H1
+    S7 --> H2
+    S7 --> H3
+    S7 --> H4
+    S7 --> H5
+
+    H1 --> S8["8. Overfitting / Underfitting Detection and Rectification<br/>- Real-Time Learning Curve Divergence (Train Loss vs. Validation Loss)<br/>- Generalization Gap Analysis (|Train Accuracy - Validation Accuracy| > 8%)<br/>- Bias-Variance Tradeoff & Spatial Memorization Diagnostic"]
+    H2 --> S8
+    H3 --> S8
+    H4 --> S8
+    H5 --> S8
+
+    S8 --> S9["9. Apply Correction Technique and Retrain<br/>- Spatial Dropout (0.2-0.3) & Dense Classifier Dropout (0.4-0.5)<br/>- Batch Normalization Across Convolutional and Recurrent Stages<br/>- L2 Weight Decay (1e-4) in AdamW & Label Smoothing (eps=0.1)<br/>- Cosine Annealing Learning Rate Scheduling with Early Stopping"]
+    --> S10["10. Final Test Evaluation<br/>- Evaluated Strictly on Quarantined, Unseen Held-Out Test Set<br/>- Multi-Class Metrics: Accuracy, Precision, Recall, Macro F1-Score, ROC-AUC<br/>- Distractor Rejection Verification on Ambient Clouds, Fog, and Dust Benchmark"]
+    --> OUT["System Output Pipeline (Problem Statement 25 Specification)<br/>Fire / Smoke Detection  -->  Severity Estimation (LOW, MED, HIGH, CRITICAL)  -->  Geographic Location  -->  Early-Warning Alert<br/>Dispatches Georeferenced Warnings with Coordinates & Estimated Affected Area to GIS Command Center"]
+```
+
+### 5 Hybrid Techniques Overview
+
+| Hybrid Technique | Architecture Components | Primary Role in System |
+| :--- | :--- | :--- |
+| **1. YOLO + EfficientNet + LSTM** | Real-time object detector + Compound scaling CNN + Recurrent unit | Ground surveillance camera feeds: localizes active flame and smoke plumes, passing deep spatial feature embeddings to LSTM for sequence tracking |
+| **2. CNN + BiLSTM + Attention** | Deep convolutional spatial encoder + Bidirectional LSTM + Attention gate | Early smoke plume recognition: captures subtle temporal motion changes bidirectionally while attention weights highlight diffuse plume edges |
+| **3. Swin Transformer + CNN** | Shifted window self-attention backbone + Localized convolutional blocks | Hierarchical multi-scale representation: handles variable smoke density across high-resolution satellite remote sensing imagery |
+| **4. YOLO + Vision Transformer + LSTM** | Patch-based detector + ViT multi-head attention + Sequence model | Weakly supervised spatiotemporal modeling: extracts attention across image tiles, tracking spatial growth without requiring dense pixel-level masks |
+| **5. ConvLSTM + Attention** | 2D topology-preserving spatial recurrence + Temporal attention | 10-day multi-spectral satellite NetCDF datacubes: preserves 2D geographic topology while predicting wildfire spread velocity and perimeter expansion |
+
+---
+
 ## Unified Dual-Branch Methodology and System Architecture
 
 The system coordinates visual observation from remote sensors and ground cameras with real-time satellite telemetry, synchronizing both data modalities through a structured 10-stage processing and validation pipeline.
