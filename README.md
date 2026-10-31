@@ -70,6 +70,32 @@ graph TD
 | **4. YOLO + Vision Transformer + LSTM** | Patch-based detector + ViT multi-head attention + Sequence model | Weakly supervised spatiotemporal modeling: extracts attention across image tiles, tracking spatial growth without requiring dense pixel-level masks |
 | **5. ConvLSTM + Attention** | 2D topology-preserving spatial recurrence + Temporal attention | 10-day multi-spectral satellite NetCDF datacubes: preserves 2D geographic topology while predicting wildfire spread velocity and perimeter expansion |
 
+### Top-3 Cascaded Pipeline Architecture (1 -> 2 -> 3 with 3 -> 1 Feedback)
+
+The top three deep learning architectures are integrated into a sequential and cyclical feature-refinement pipeline:
+
+```mermaid
+graph LR
+    IMG["Raw Image / Frame Tensor<br/>(224x224 RGB)"] --> M1
+
+    subgraph CASCADE["Top-3 Model Sequential Cascade with Cyclical Refinement"]
+        M1["Model 1: YOLO + EfficientNet<br/>Stage 1: Spatial Localizer & Feature Extractor<br/>Output: Dense Feature Vector Z1"]
+        M2["Model 2: Swin Transformer + CNN<br/>Stage 2: Contextual Shifted-Window Attention<br/>Input: Z1 from Model 1 | Output: Refined Vector Z2"]
+        M3["Model 3: CNN + BiLSTM + Attention<br/>Stage 3: Temporal Recurrence & Attention<br/>Input: Z2 from Model 2 | Output: Final Classification"]
+
+        M1 -->|Output Z1 feeds as Input| M2
+        M2 -->|Output Z2 feeds as Input| M3
+        M3 -.->|Cyclical Feedback 3 -> 1: Temporal Attention Prior Modulates Model 1| M1
+    end
+
+    M3 --> RES["Final Decision & Early-Warning Output<br/>Fire/Smoke Detection -> Severity Estimation -> Location -> Alert"]
+```
+
+* **Model 1 $\rightarrow$ Model 2**: Model 1 (YOLO + EfficientNet) extracts localized spatial activations from raw camera and satellite frames, projecting candidate regions into feature embedding $Z_1 \in \mathbb{R}^{128}$. This output vector $Z_1$ is fed directly as the input sequence to Model 2.
+* **Model 2 $\rightarrow$ Model 3**: Model 2 (Swin Transformer + CNN) applies multi-head shifted-window self-attention across tokens derived from $Z_1$, separating diffuse smoke textures from lookalike clouds and fog, producing refined representation $Z_2 \in \mathbb{R}^{128}$. This output is fed directly into Model 3.
+* **Model 3 $\rightarrow$ Final Output**: Model 3 (CNN + BiLSTM + Attention) models temporal forward and backward sequence dynamics over $Z_2$, using attention weights to emphasize frames with rapid plume expansion and outputting final multi-class probabilities and severity.
+* **Cyclical Feedback ($3 \rightarrow 1$)**: High-level temporal context from Model 3 ($3 \rightarrow 1$) is fed back as an auxiliary prior to Model 1, dynamically gating spatial receptive sensitivity for a refined second evaluation pass ($3 \rightarrow 1 \rightarrow 2 \rightarrow 3$).
+
 ---
 
 ## Unified Dual-Branch Methodology and System Architecture

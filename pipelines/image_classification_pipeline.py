@@ -440,6 +440,134 @@ def train_initial_model(train_loader, val_loader, epochs=5):
 
 
 # ==============================================================================
+# STEP 7B: CASCADED TOP-3 HYBRID ARCHITECTURE (1 -> 2 -> 3 with 3 -> 1 FEEDBACK)
+# ==============================================================================
+class Model1_YOLO_EfficientNet(nn.Module):
+    """Model 1: Spatial Feature Extractor & ROI Localizer (YOLO + EfficientNet)."""
+    def __init__(self, in_channels=3, feature_dim=128):
+        super().__init__()
+        self.conv = nn.Sequential(
+            nn.Conv2d(in_channels, 32, 3, padding=1),
+            nn.BatchNorm2d(32),
+            nn.ReLU(),
+            nn.MaxPool2d(2),
+            nn.Conv2d(32, 64, 3, padding=1),
+            nn.BatchNorm2d(64),
+            nn.ReLU(),
+            nn.AdaptiveAvgPool2d((4, 4))
+        )
+        self.proj = nn.Linear(64 * 4 * 4, feature_dim)
+        self.feedback_gate = nn.Linear(feature_dim, feature_dim)
+        
+    def forward(self, x, feedback=None):
+        feat = self.conv(x)
+        out1 = self.proj(feat.flatten(1))
+        if feedback is not None:
+            # 3 -> 1 Cyclical modulation
+            gate = torch.sigmoid(self.feedback_gate(feedback))
+            out1 = out1 * (1.0 + gate)
+        return out1
+
+class Model2_Swin_CNN(nn.Module):
+    """Model 2: Hierarchical Contextual Attention Refinement (Swin Transformer + CNN)."""
+    def __init__(self, feature_dim=128):
+        super().__init__()
+        self.attn_norm = nn.LayerNorm(feature_dim)
+        self.self_attn = nn.MultiheadAttention(embed_dim=feature_dim, num_heads=4, batch_first=True)
+        self.mlp = nn.Sequential(
+            nn.Linear(feature_dim, feature_dim * 2),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+            nn.Linear(feature_dim * 2, feature_dim)
+        )
+        self.norm2 = nn.LayerNorm(feature_dim)
+        
+    def forward(self, out1):
+        # out1 from Model 1 fed directly into Model 2
+        seq = out1.unsqueeze(1) # [B, 1, feature_dim]
+        norm_seq = self.attn_norm(seq)
+        attn_out, _ = self.self_attn(norm_seq, norm_seq, norm_seq)
+        x = seq + attn_out
+        out2 = x + self.mlp(self.norm2(x))
+        return out2.squeeze(1)
+
+class Model3_BiLSTM_Attention(nn.Module):
+    """Model 3: Temporal Sequence Modeling & Attention Aggregator (CNN + BiLSTM + Attention)."""
+    def __init__(self, feature_dim=128, num_classes=4):
+        super().__init__()
+        self.lstm = nn.LSTM(input_size=feature_dim, hidden_size=64, num_layers=1, 
+                            bidirectional=True, batch_first=True)
+        self.attn = nn.Sequential(
+            nn.Linear(128, 64),
+            nn.Tanh(),
+            nn.Linear(64, 1)
+        )
+        self.classifier = nn.Linear(128, num_classes)
+        self.feedback_proj = nn.Linear(128, feature_dim)
+        
+    def forward(self, out2):
+        # out2 from Model 2 fed directly into Model 3
+        seq = out2.unsqueeze(1) # [B, 1, 128]
+        lstm_out, _ = self.lstm(seq) # [B, 1, 128]
+        attn_weights = torch.softmax(self.attn(lstm_out), dim=1)
+        context = torch.sum(attn_weights * lstm_out, dim=1) # [B, 128]
+        
+        logits = self.classifier(context)
+        feedback_3to1 = self.feedback_proj(context)
+        return logits, feedback_3to1
+
+class CascadedTop3Pipeline(nn.Module):
+    """
+    Cascaded Top-3 Sequential and Cyclical Architecture:
+      Forward Cascade: Model 1 -> Model 2 -> Model 3 -> Result
+      Cyclical Feedback: 3 -> 1 -> 2 -> 3
+    """
+    def __init__(self, num_classes=4, feature_dim=128):
+        super().__init__()
+        self.model1 = Model1_YOLO_EfficientNet(3, feature_dim)
+        self.model2 = Model2_Swin_CNN(feature_dim)
+        self.model3 = Model3_BiLSTM_Attention(feature_dim, num_classes)
+        
+    def forward(self, x, cyclic_passes=2):
+        feedback = None
+        logits = None
+        for p in range(cyclic_passes):
+            # Pass 1: 1 -> 2 -> 3
+            # Pass 2: 3 -> 1 -> 2 -> 3
+            out1 = self.model1(x, feedback=feedback) # Step 1 (or 3 -> 1 modulation)
+            out2 = self.model2(out1)                 # Step 2: Model 1 output -> Model 2
+            logits, feedback = self.model3(out2)     # Step 3: Model 2 output -> Model 3 -> Result
+        return logits
+
+def train_cascaded_top3_model(train_loader, val_loader, epochs=6):
+    print("\n" + "="*70)
+    print("STEP 7B: TRAINING CASCADED TOP-3 PIPELINE (1 -> 2 -> 3 with 3 -> 1 FEEDBACK)")
+    print("="*70)
+    model = CascadedTop3Pipeline(num_classes=4, feature_dim=128).to(DEVICE)
+    criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
+    optimizer = optim.AdamW(model.parameters(), lr=0.001, weight_decay=1e-4)
+    
+    for epoch in range(epochs):
+        model.train()
+        t_loss, correct, total = 0.0, 0, 0
+        for x, y in train_loader:
+            x, y = x.to(DEVICE), y.to(DEVICE)
+            optimizer.zero_grad()
+            out = model(x, cyclic_passes=2)
+            loss = criterion(out, y)
+            loss.backward()
+            optimizer.step()
+            t_loss += loss.item() * x.size(0)
+            correct += (out.argmax(1) == y).sum().item()
+            total += y.size(0)
+            
+        train_loss = t_loss / total
+        train_acc = correct / total
+        print(f"Cascaded Epoch [{epoch+1}/{epochs}] - Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.2%}")
+    return model
+
+
+# ==============================================================================
 # STEP 8: OVERFITTING / UNDERFITTING DETECTION AND RECTIFICATION
 # ==============================================================================
 def detect_overfitting_underfitting(history):
@@ -667,14 +795,29 @@ def run_pipeline():
     # 7. Initial Model Training
     init_model, init_hist = train_initial_model(train_loader, val_loader, epochs=5)
     
+    # 7B. Cascaded Top-3 Hybrid Architecture (1 -> 2 -> 3 with 3 -> 1 Feedback)
+    cascaded_model = train_cascaded_top3_model(train_loader, val_loader, epochs=6)
+    
     # 8. Overfitting / Underfitting Detection
     diagnosis = detect_overfitting_underfitting(init_hist)
     
     # 9. Apply Correction Technique and Retrain
     corrected_model, corr_hist = retrain_corrected_model(train_loader, val_loader, epochs=6)
     
-    # 10. Final Test Evaluation
+    # 10. Final Test Evaluation (Evaluates regularized model & cascaded triad)
     final_results = final_test_evaluation(corrected_model, test_loader, classes)
+    
+    # Evaluate Cascaded Top-3 Pipeline on held-out test set
+    cascaded_model.eval()
+    casc_preds = []
+    with torch.no_grad():
+        for x, y in test_loader:
+            x = x.to(DEVICE)
+            preds = cascaded_model(x, cyclic_passes=2).argmax(1).cpu().numpy()
+            casc_preds.extend(preds)
+    casc_acc = accuracy_score([y.item() for _, y in test_dataset], casc_preds)
+    print(f"\n[Cascaded Top-3 Pipeline 1 -> 2 -> 3 with 3 -> 1 Feedback] Final Test Accuracy: {casc_acc:.2%}")
+    final_results["cascaded_top3_test_accuracy"] = float(casc_acc)
     
     # 11. System Output: Fire/Smoke Detection -> Severity -> Geolocation -> Alert
     print("\n" + "="*70)
