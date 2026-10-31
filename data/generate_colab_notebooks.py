@@ -45,6 +45,8 @@ def create_gantt_chart_cells(pipeline_title="Unified Multimodal Wildfire Pipelin
         "",
         "The development and deployment lifecycle is structured into 6 sequential engineering phases over a 12-week timeline:",
         "",
+        "![Project Engineering Gantt Chart](https://raw.githubusercontent.com/ssreeakash-cpu/AI-Hackathon/main/docs/project_gantt_chart.png)",
+        "",
         "| Phase | Stage Name | Timeline | Core Deliverables |",
         "| :--- | :--- | :---: | :--- |",
         "| **Phase 1** | Data Ingestion & Leakage Audits | Weeks 1 - 2.5 | Multi-modal imagery & satellite telemetry ingestion, target formulation, duplicate hash deduplication, target leakage audit |",
