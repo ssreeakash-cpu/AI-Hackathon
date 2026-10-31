@@ -17,6 +17,25 @@ All pipelines are directly executable in Google Colab with preconfigured depende
 
 ---
 
+## Project Engineering Roadmap & Lifecycle Schedule (Gantt Chart)
+
+The implementation and validation of the multimodal wildfire detection system is governed by a 12-week structured engineering lifecycle spanning data leakage auditing, contrast transformation, stratified cross-validation, 5 hybrid architectures, Top-3 cascading, and multimodal alert dispatch.
+
+![Project Engineering Gantt Chart](docs/project_gantt_chart.png)
+
+### 12-Week Methodology Schedule Breakdown
+
+| Phase | Engineering Stage | Timeline | Key Tasks & Technical Deliverables |
+| :--- | :--- | :---: | :--- |
+| **Phase 1** | **Data Ingestion & Integrity** | Weeks 1 – 2.5 | Multi-sensor telemetry loading (NASA VIIRS/MODIS CSV, camera & drone imagery), target formulation, target leakage correlation checks (\|r\| < 0.90), MD5 duplicate hash audits, zero-variance feature elimination. |
+| **Phase 2** | **Feature Transformation & Stratification** | Weeks 2.5 – 5.0 | Contrast Limited Adaptive Histogram Equalization (CLAHE) on image luminance, stratified train/val/test partitioning (65% / 15% / 20%), 10-fold CV configuration, DCGAN image augmentation (training partition only), SMOTE tabular resampling (training partition only). |
+| **Phase 3** | **Model Architecture Exploration** | Weeks 4.5 – 7.5 | Evaluation of 5 Hybrid Deep Learning Techniques (YOLO+EfficientNet+LSTM, CNN+BiLSTM+Attention, Swin+CNN, YOLO+ViT+LSTM, ConvLSTM+Attention), unconstrained Random Forest baseline for tabular telemetry, 10-fold CV benchmarking. |
+| **Phase 4** | **Cascaded System Engineering** | Weeks 7.0 – 9.5 | Sequential cascading of top 3 models: Model 1 (spatial) $\to$ Model 2 (contextual shifted-window attention) $\to$ Model 3 (temporal recurrence), integration of cyclical feedback loop (3 $\to$ 1 attention modulation prior). |
+| **Phase 5** | **Diagnostics & Regularization** | Weeks 8.5 – 11.0 | Overfitting and underfitting generalization gap analysis, structural decision tree pruning (max_depth=5), spatial/dense dropout (0.4), label smoothing (0.1), L2 weight decay, and regularized retraining. |
+| **Phase 6** | **Evaluation & Multimodal Deployment** | Weeks 10.0 – 12.0 | Isolated quarantined test set evaluation, multimodal decision late-fusion engine (visual confidence + satellite FRP), automated georeferenced alert dispatch to incident commanders. |
+
+---
+
 ## Image Classification Pipeline & 5 Hybrid Techniques Architecture
 
 As formulated in VIT Tech-a-thon Problem Statement 25 ("AI-Based Early Detection of Forest Fire and Smoke from Satellite / Camera Images"), the visual detection stream combines spatial feature extraction with temporal sequence modeling to distinguish true wildfire events from atmospheric distractors (clouds, fog, dust).

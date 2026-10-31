@@ -39,6 +39,89 @@ def create_markdown_cell(source_lines):
         "source": formatted
     }
 
+def create_gantt_chart_cells(pipeline_title="Unified Multimodal Wildfire Pipeline"):
+    md_cell = create_markdown_cell([
+        "## Engineering Lifecycle Roadmap & Methodology Schedule (Gantt Chart)",
+        "",
+        "The development and deployment lifecycle is structured into 6 sequential engineering phases over a 12-week timeline:",
+        "",
+        "| Phase | Stage Name | Timeline | Core Deliverables |",
+        "| :--- | :--- | :---: | :--- |",
+        "| **Phase 1** | Data Ingestion & Leakage Audits | Weeks 1 - 2.5 | Multi-modal imagery & satellite telemetry ingestion, target formulation, duplicate hash deduplication, target leakage audit |",
+        "| **Phase 2** | Transformation & Balancing | Weeks 2.5 - 5.0 | CLAHE contrast enhancement, 65/15/20 stratified partitioning, 10-Fold CV, training-only DCGAN & SMOTE resampling |",
+        "| **Phase 3** | Architecture Exploration | Weeks 4.5 - 7.5 | 5 Hybrid Deep Learning models (YOLO, Swin, BiLSTM, ViT, ConvLSTM), unconstrained tabular baseline, CV benchmarking |",
+        "| **Phase 4** | Cascaded Top-3 Engineering | Weeks 7.0 - 9.5 | Model 1 -> Model 2 -> Model 3 sequential cascading, cyclical 3 -> 1 attention feedback loop |",
+        "| **Phase 5** | Diagnostics & Retraining | Weeks 8.5 - 11.0 | Learning curve & generalization gap audits, dropout/batchnorm/pruning regularization, model retrain |",
+        "| **Phase 6** | Evaluation & Deployment | Weeks 10.0 - 12.0 | Quarantined test evaluation, multimodal decision late-fusion, georeferenced GIS alert dispatch |",
+        "",
+        "Run the cell below to render the interactive publication-grade Gantt Chart:"
+    ])
+    code_cell = create_code_cell([
+        "# =====================================================================",
+        "# PROJECT LIFECYCLE & METHODOLOGY TIMELINE (GANTT CHART)",
+        "# =====================================================================",
+        "import matplotlib.pyplot as plt",
+        "import matplotlib.patches as patches",
+        "import numpy as np",
+        "",
+        "gantt_tasks = [",
+        "    {'task': '1. Multi-Modal Telemetry & Imagery Ingestion', 'start': 0.0, 'duration': 2.0, 'phase': 'Data Ingestion & Integrity', 'color': '#1f77b4'},",
+        "    {'task': '2. Preprocessing & Fire Radiative Power Binning', 'start': 1.0, 'duration': 1.8, 'phase': 'Data Ingestion & Integrity', 'color': '#1f77b4'},",
+        "    {'task': '3. Data Leakage Audits (Target, Duplicate, Features)', 'start': 1.5, 'duration': 1.5, 'phase': 'Data Ingestion & Integrity', 'color': '#1f77b4'},",
+        "    {'task': '4. Contrast Limited Adaptive Histogram Eq. (CLAHE)', 'start': 2.2, 'duration': 1.5, 'phase': 'Transformation & Balancing', 'color': '#009688'},",
+        "    {'task': '5. Stratified Partitioning (65/15/20) & 10-Fold CV', 'start': 3.0, 'duration': 1.5, 'phase': 'Transformation & Balancing', 'color': '#009688'},",
+        "    {'task': '6. Training-Only Resampling: DCGAN & SMOTE', 'start': 3.8, 'duration': 2.2, 'phase': 'Transformation & Balancing', 'color': '#009688'},",
+        "    {'task': '7. Initial Image Models (5 Hybrid Architectures)', 'start': 4.5, 'duration': 2.5, 'phase': 'Architecture Exploration', 'color': '#3f51b5'},",
+        "    {'task': '8. Tabular Baseline Evaluation (Random Forest)', 'start': 5.0, 'duration': 1.8, 'phase': 'Architecture Exploration', 'color': '#3f51b5'},",
+        "    {'task': '9. Cross-Validation Benchmarking & Top-3 Selection', 'start': 6.0, 'duration': 1.8, 'phase': 'Architecture Exploration', 'color': '#3f51b5'},",
+        "    {'task': '10. Cascaded Top-3 Pipeline (Model 1 -> 2 -> 3)', 'start': 7.0, 'duration': 2.0, 'phase': 'Cascaded System Engineering', 'color': '#673ab7'},",
+        "    {'task': '11. Cyclical Feedback Loop (Model 3 -> Model 1)', 'start': 7.8, 'duration': 1.8, 'phase': 'Cascaded System Engineering', 'color': '#673ab7'},",
+        "    {'task': '12. Overfit / Underfit Gap & Learning Curve Audits', 'start': 8.5, 'duration': 1.5, 'phase': 'Diagnostics & Retraining', 'color': '#e65100'},",
+        "    {'task': '13. Regularization & Tree Pruning (Dropout, Smoothing)', 'start': 9.0, 'duration': 1.8, 'phase': 'Diagnostics & Retraining', 'color': '#e65100'},",
+        "    {'task': '14. Post-Correction Retraining & Convergence Auditing', 'start': 9.5, 'duration': 1.5, 'phase': 'Diagnostics & Retraining', 'color': '#e65100'},",
+        "    {'task': '15. Quarantined Test Evaluation & Confusion Matrices', 'start': 10.0, 'duration': 1.5, 'phase': 'Evaluation & Deployment', 'color': '#2e7d32'},",
+        "    {'task': '16. Multimodal Decision Fusion Engine', 'start': 10.5, 'duration': 1.3, 'phase': 'Evaluation & Deployment', 'color': '#2e7d32'},",
+        "    {'task': '17. Georeferenced Early-Warning Alert Dispatch', 'start': 11.0, 'duration': 1.0, 'phase': 'Evaluation & Deployment', 'color': '#2e7d32'},",
+        "]",
+        "",
+        "tasks_rev = gantt_tasks[::-1]",
+        "fig, ax = plt.subplots(figsize=(15, 9), dpi=150)",
+        "fig.patch.set_facecolor('#ffffff')",
+        "ax.set_facecolor('#fafafa')",
+        "",
+        "y_pos = np.arange(len(tasks_rev))",
+        "phases_tracked = {}",
+        "",
+        "for i, t in enumerate(tasks_rev):",
+        "    bar = ax.barh(y_pos[i], t['duration'], left=t['start'], height=0.55,",
+        "                  color=t['color'], edgecolor='#2c3e50', linewidth=1.0, alpha=0.9)",
+        "    end = t['start'] + t['duration']",
+        "    ax.text(end + 0.1, y_pos[i], f\" W{t['start']:.1f}-W{end:.1f}\",",
+        "            va='center', ha='left', fontsize=8, fontweight='bold', color='#333333')",
+        "    if t['phase'] not in phases_tracked:",
+        "        phases_tracked[t['phase']] = t['color']",
+        "",
+        "ax.set_yticks(y_pos)",
+        "ax.set_yticklabels([t['task'] for t in tasks_rev], fontsize=9, fontweight='bold', color='#2c3e50')",
+        "ax.set_xlabel('Project Timeline (Weeks)', fontsize=11, fontweight='bold', color='#2c3e50')",
+        "ax.set_xlim(0, 13)",
+        "ax.set_xticks(range(14))",
+        "ax.set_xticklabels([f'Week {w}' for w in range(14)], fontsize=8.5, fontweight='bold')",
+        "ax.xaxis.grid(True, linestyle='--', alpha=0.6, color='#bdc3c7')",
+        "ax.yaxis.grid(False)",
+        "",
+        f"plt.title('{pipeline_title} Engineering Schedule (Gantt Chart)', fontsize=13, fontweight='bold', color='#1a252f', pad=12)",
+        "",
+        "legend_patches = [patches.Patch(facecolor=c, edgecolor='#2c3e50', label=p, linewidth=0.8)",
+        "                  for p, c in phases_tracked.items()]",
+        "ax.legend(handles=legend_patches[::-1], loc='lower right', frameon=True, fontsize=8.5, title='Phases')",
+        "plt.tight_layout()",
+        "plt.show()",
+        "print('Gantt Chart rendered successfully.')"
+    ])
+    return md_cell, code_cell
+
+
 TWO_FLOWCHARTS_OVERVIEW_MD = [
     "### Dual Methodology Architecture: Two Complete Pipelines One Below Another",
     "",
@@ -136,6 +219,11 @@ def build_unified_master_notebook():
         "%cd AI-Hackathon",
         "!pip install -q opencv-python imbalanced-learn scikit-learn torchvision matplotlib pillow pandas numpy"
     ]))
+    
+    # Gantt Chart Roadmap
+    gantt_md, gantt_code = create_gantt_chart_cells("Unified Multimodal Wildfire Pipeline")
+    cells.append(gantt_md)
+    cells.append(gantt_code)
     
     # =========================================================================
     # PART 1: FLOWCHART 1 - IMAGE CLASSIFICATION PIPELINE
@@ -881,6 +969,11 @@ def build_image_notebook():
         "!pip install -q opencv-python scikit-learn torchvision matplotlib pillow"
     ]))
     
+    # Gantt Chart Roadmap
+    gantt_md, gantt_code = create_gantt_chart_cells("Image Classification Pipeline")
+    cells.append(gantt_md)
+    cells.append(gantt_code)
+    
     # 2. Step 1: Load Image Dataset
     cells.append(create_markdown_cell([
         "## Step 1: Ingest Image Dataset",
@@ -1449,6 +1542,11 @@ def build_tabular_notebook():
         "%cd AI-Hackathon",
         "!pip install -q imbalanced-learn scikit-learn pandas numpy matplotlib seaborn"
     ]))
+    
+    # Gantt Chart Roadmap
+    gantt_md, gantt_code = create_gantt_chart_cells("CSV Tabular Telemetry Pipeline")
+    cells.append(gantt_md)
+    cells.append(gantt_code)
     
     # 2. Step 1: Load CSV Dataset
     cells.append(create_markdown_cell([
