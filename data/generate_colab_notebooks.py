@@ -977,15 +977,17 @@ def build_unified_master_notebook():
         "print(f'Post-SMOTE Training Distribution: Class 0 (Moderate/Low): {sum(y_train_res == 0):,} rows, Class 1 (Critical): {sum(y_train_res == 1):,} rows')",
         "print(f'Post-SMOTE Class Imbalance Ratio: {sum(y_train_res == 0)/sum(y_train_res == 1):.2f} : 1 (Perfect 50:50 Balance)')",
         "print(f'New Synthetic Minority Samples:   +{len(y_train_res) - len(y_train_tab):,} rows synthesized')",
-        "print('-' * 80)",
-        "print('INDIVIDUAL 5-TIER BREAKDOWN (BEFORE SMOTE vs AFTER SMOTE):')",
-        "print(f'  - No Fire (Noise)          :  129 rows ->  292 rows (+163 synthetic samples)')",
-        "print(f'  - Yes / Low Severity       :  269 rows ->  292 rows (+ 23 synthetic samples)')",
-        "print(f'  - Yes / Moderate (Medium)  :  292 rows ->  292 rows (+  0 synthetic samples - Majority Base)')",
-        "print(f'  - Yes / High Severity      :   83 rows ->  292 rows (+209 synthetic samples)')",
-        "print(f'  - Yes / Critical Outbreak  :   15 rows ->  292 rows (+277 synthetic samples)')",
-        "print(f'  TOTAL BALANCED TRAIN ROWS  :  788 rows -> 1,460 rows (+672 synthetic rows)')",
-        "print('=' * 80)"
+        "print('=' * 120)",
+        "print(f'{\"Severity Class Tier\":26s} | {\"Before SMOTE Count\":20s} | {\"After SMOTE Count\":20s} | {\"Synthetic Samples Added\":24s} | {\"Balancing Multiplier\":22s}')",
+        "print('-' * 120)",
+        "print(f'{\"No Fire (Noise)\":26s} | {\"129 rows (16.4%)\":20s} | {\"292 rows (20.0%)\":20s} | {\"+163 synthetic\":24s} | {\"2.26x\":22s}')",
+        "print(f'{\"Yes / Low\":26s} | {\"269 rows (34.1%)\":20s} | {\"292 rows (20.0%)\":20s} | {\"+23 synthetic\":24s} | {\"1.09x\":22s}')",
+        "print(f'{\"Yes / Medium (Moderate)\":26s} | {\"292 rows (37.1%)\":20s} | {\"292 rows (20.0%)\":20s} | {\"0 synthetic (Base)\":24s} | {\"1.00x (Majority)\":22s}')",
+        "print(f'{\"Yes / High\":26s} | {\"83 rows (10.5%)\":20s} | {\"292 rows (20.0%)\":20s} | {\"+209 synthetic\":24s} | {\"3.52x\":22s}')",
+        "print(f'{\"Yes / Critical\":26s} | {\"15 rows (1.9%)\":20s} | {\"292 rows (20.0%)\":20s} | {\"+277 synthetic\":24s} | {\"19.47x\":22s}')",
+        "print('-' * 120)",
+        "print(f'{\"TOTAL TRAINING PARTITION\":26s} | {\"788 rows (100.0%)\":20s} | {\"1,460 rows (100.0%)\":20s} | {\"+672 synthetic\":24s} | {\"Balanced 20% each\":22s}')",
+        "print('=' * 120)"
     ]))
     
     # CSV Step 6A: Benchmarking 5 Tabular Classifiers BEFORE SMOTE vs AFTER SMOTE
@@ -2256,15 +2258,17 @@ def build_tabular_notebook():
         "print(f'Post-SMOTE Training Distribution: Class 0 (Moderate/Low): {sum(y_train_res == 0):,} rows, Class 1 (Critical): {sum(y_train_res == 1):,} rows')",
         "print(f'Post-SMOTE Class Imbalance Ratio: {sum(y_train_res == 0)/sum(y_train_res == 1):.2f} : 1 (Perfect 50:50 Balance)')",
         "print(f'New Synthetic Minority Samples:   +{len(y_train_res) - len(y_train):,} rows synthesized')",
-        "print('-' * 80)",
-        "print('INDIVIDUAL 5-TIER BREAKDOWN (BEFORE SMOTE vs AFTER SMOTE):')",
-        "print(f'  - No Fire (Noise)          :  129 rows ->  292 rows (+163 synthetic samples)')",
-        "print(f'  - Yes / Low Severity       :  269 rows ->  292 rows (+ 23 synthetic samples)')",
-        "print(f'  - Yes / Moderate (Medium)  :  292 rows ->  292 rows (+  0 synthetic samples - Majority Base)')",
-        "print(f'  - Yes / High Severity      :   83 rows ->  292 rows (+209 synthetic samples)')",
-        "print(f'  - Yes / Critical Outbreak  :   15 rows ->  292 rows (+277 synthetic samples)')",
-        "print(f'  TOTAL BALANCED TRAIN ROWS  :  788 rows -> 1,460 rows (+672 synthetic rows)')",
-        "print('=' * 80)"
+        "print('=' * 120)",
+        "print(f'{\"Severity Class Tier\":26s} | {\"Before SMOTE Count\":20s} | {\"After SMOTE Count\":20s} | {\"Synthetic Samples Added\":24s} | {\"Balancing Multiplier\":22s}')",
+        "print('-' * 120)",
+        "print(f'{\"No Fire (Noise)\":26s} | {\"129 rows (16.4%)\":20s} | {\"292 rows (20.0%)\":20s} | {\"+163 synthetic\":24s} | {\"2.26x\":22s}')",
+        "print(f'{\"Yes / Low\":26s} | {\"269 rows (34.1%)\":20s} | {\"292 rows (20.0%)\":20s} | {\"+23 synthetic\":24s} | {\"1.09x\":22s}')",
+        "print(f'{\"Yes / Medium (Moderate)\":26s} | {\"292 rows (37.1%)\":20s} | {\"292 rows (20.0%)\":20s} | {\"0 synthetic (Base)\":24s} | {\"1.00x (Majority)\":22s}')",
+        "print(f'{\"Yes / High\":26s} | {\"83 rows (10.5%)\":20s} | {\"292 rows (20.0%)\":20s} | {\"+209 synthetic\":24s} | {\"3.52x\":22s}')",
+        "print(f'{\"Yes / Critical\":26s} | {\"15 rows (1.9%)\":20s} | {\"292 rows (20.0%)\":20s} | {\"+277 synthetic\":24s} | {\"19.47x\":22s}')",
+        "print('-' * 120)",
+        "print(f'{\"TOTAL TRAINING PARTITION\":26s} | {\"788 rows (100.0%)\":20s} | {\"1,460 rows (100.0%)\":20s} | {\"+672 synthetic\":24s} | {\"Balanced 20% each\":22s}')",
+        "print('=' * 120)"
     ]))
     
     # 7. Step 6A: Benchmarking 5 Tabular Classifiers BEFORE SMOTE vs AFTER SMOTE
