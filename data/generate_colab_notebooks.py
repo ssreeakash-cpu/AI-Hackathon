@@ -134,71 +134,71 @@ TWO_FLOWCHARTS_OVERVIEW_MD = [
     "FLOWCHART 1: IMAGE CLASSIFICATION PROBLEM WORKFLOW",
     "=========================================================================================",
     "Load Image Dataset",
-    "       ↓",
+    "       |",
     "Data Preprocessing",
-    "       ↓",
-    "Data Leakage Checks (Target leakage • duplicate leakage • suspicious features)",
-    "       ↓",
+    "       |",
+    "Data Leakage Checks (Target leakage - duplicate leakage - suspicious features)",
+    "       |",
     "CLAHE (when contrast enhancement is useful)",
-    "       ↓",
+    "       |",
     "1. Train / Validation / Test Split or Train / Test Split",
     "2. 10-fold cross validation",
-    "       ↓",
+    "       |",
     "GAN Augmentation on TRAINING data only",
-    "       ↓",
+    "       |",
     "Initial Model Training (Evaluating 5 Hybrid Techniques):",
     "   1. YOLO + EfficientNet + LSTM",
     "   2. CNN + BiLSTM + Attention",
     "   3. Swin Transformer + CNN",
     "   4. YOLO + Vision Transformer + LSTM",
     "   5. ConvLSTM + Attention",
-    "       ↓",
+    "       |",
     "Cascaded Top-3 Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3 -> Result with 3 -> 1 Feedback):",
-    "   • Model 1 (YOLO + EfficientNet) output to Model 2 (1 -> 2)",
-    "   • Model 1 output to Model 3 (1 -> 3 direct skip connection)",
-    "   • Model 2 (Swin Transformer + CNN) output to Model 3 (2 -> 3)",
-    "   • Model 3 (CNN + BiLSTM + Attention) aggregates 1 & 2 -> Result (1 -> 2 -> 3)",
-    "   • Cyclical Feedback Loop: Model 3 temporal attention modulates Model 1 (3 -> 1)",
-    "       ↓",
+    "   - Model 1 (YOLO + EfficientNet) output to Model 2 (1 -> 2)",
+    "   - Model 1 output to Model 3 (1 -> 3 direct skip connection)",
+    "   - Model 2 (Swin Transformer + CNN) output to Model 3 (2 -> 3)",
+    "   - Model 3 (CNN + BiLSTM + Attention) aggregates 1 & 2 -> Result (1 -> 2 -> 3)",
+    "   - Cyclical Feedback Loop: Model 3 temporal attention modulates Model 1 (3 -> 1)",
+    "       |",
     "Overfitting / Underfitting Detection and Rectification",
-    "       ↓",
+    "       |",
     "Apply Correction Technique and Retrain",
-    "       ↓",
+    "       |",
     "Final Test Evaluation",
-    "       ↓",
+    "       |",
     "Output: Fire/smoke detection -> severity estimation -> geographic location -> early-warning alert",
     "",
     "=========================================================================================",
     "FLOWCHART 2: CSV / TABULAR CLASSIFICATION & CLASS IMBALANCE HANDLING WORKFLOW",
     "=========================================================================================",
     "Load CSV Dataset",
-    "       ↓",
+    "       |",
     "Data Preprocessing & Target Severity Formulation",
-    "       ↓",
-    "Data Leakage Checks (Target leakage • duplicate leakage • suspicious features)",
-    "       ↓",
+    "       |",
+    "Data Leakage Checks (Target leakage - duplicate leakage - suspicious features)",
+    "       |",
     "1. Train / Validation / Test Split (65% / 15% / 20% quarantined)",
     "2. 10-fold cross validation (StandardScaler fit strictly on Training partition)",
-    "       ↓",
+    "       |",
     "SMOTE Algorithm (balancing dataset on TRAINING data only)",
-    "       ↓",
+    "       |",
     "Initial Model Training (Evaluating 5 Tabular Machine Learning Models):",
     "   1. Random Forest Classifier",
     "   2. Gradient Boosting Classifier",
     "   3. Multi-Layer Perceptron (MLP Neural Net)",
     "   4. Extra Trees Classifier",
     "   5. Histogram Gradient Boosting Classifier",
-    "       ↓",
+    "       |",
     "Cascaded Top-3 Tabular Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3 -> Result):",
-    "   • Model 1 (Random Forest) output probability to Model 2 (1 -> 2)",
-    "   • Model 1 output probability to Model 3 (1 -> 3 direct skip connection)",
-    "   • Model 2 (MLP Neural Net) output probability to Model 3 (2 -> 3)",
-    "   • Model 3 (Gradient Boosting) aggregates 1 & 2 -> Result (1 -> 2 -> 3)",
-    "       ↓",
+    "   - Model 1 (Random Forest) output probability to Model 2 (1 -> 2)",
+    "   - Model 1 output probability to Model 3 (1 -> 3 direct skip connection)",
+    "   - Model 2 (MLP Neural Net) output probability to Model 3 (2 -> 3)",
+    "   - Model 3 (Gradient Boosting) aggregates 1 & 2 -> Result (1 -> 2 -> 3)",
+    "       |",
     "Overfitting / Underfitting Detection and Rectification",
-    "       ↓",
+    "       |",
     "Apply Correction Technique and Retrain (Structural Tree Pruning & Regularized Boosting)",
-    "       ↓",
+    "       |",
     "Final Test Evaluation (Balanced Accuracy, ROC-AUC, F1)",
     "",
     "=========================================================================================",
@@ -214,7 +214,7 @@ def build_unified_master_notebook():
     # 0. Header
     header_lines = [
         "# Unified AI Wildfire Early Detection: Two Complete Workflows One Below Another",
-        "### Problem Statement 25 • VIT Tech-a-thon",
+        "### Problem Statement 25 - VIT Tech-a-thon",
         "",
         "[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ssreeakash-cpu/AI-Hackathon/blob/main/notebooks/Unified_Multimodal_Pipeline_Colab.ipynb)",
         "",
@@ -255,7 +255,7 @@ def build_unified_master_notebook():
     
     # Step 1: Load Image Dataset
     cells.append(create_markdown_cell([
-        "## Part 1 • Step 1: Load Image Dataset",
+        "## Part 1 - Step 1: Load Image Dataset",
         "Discovers multi-class camera imagery across `Fire`, `Smoke`, `Clouds_Fog` (negative distractor), and `Clear`."
     ]))
     cells.append(create_code_cell([
@@ -296,7 +296,7 @@ def build_unified_master_notebook():
     
     # Step 2: Image Preprocessing & 4-Tier Severity Formulation
     cells.append(create_markdown_cell([
-        "## Part 1 • Step 2: Data Preprocessing & 4-Tier Severity Formulation",
+        "## Part 1 - Step 2: Data Preprocessing & 4-Tier Severity Formulation",
         "Standardizes input geometry to uniform (128, 128) resolution, converts color representation from BGR to RGB, and calculates frame counts across negative distractors (No Fire) and active wildfire / smoke detections (Yes: Low, Moderate, High, Critical)."
     ]))
     cells.append(create_code_cell([
@@ -332,7 +332,7 @@ def build_unified_master_notebook():
     
     # Step 3: Image Leakage Checks
     cells.append(create_markdown_cell([
-        "## Part 1 • Step 3: Data Leakage Checks",
+        "## Part 1 - Step 3: Data Leakage Checks",
         "Executes 3 critical leakage audits:",
         "1. **Target Leakage**: Verifies dimension uniformity to eliminate resolution shortcuts.",
         "2. **Duplicate Leakage**: Computes MD5 perceptual hashes to prevent identical frames leaking across splits.",
@@ -355,7 +355,7 @@ def build_unified_master_notebook():
     
     # Step 4: CLAHE
     cells.append(create_markdown_cell([
-        "## Part 1 • Step 4: Contrast Limited Adaptive Histogram Equalization (CLAHE)",
+        "## Part 1 - Step 4: Contrast Limited Adaptive Histogram Equalization (CLAHE)",
         "Enhances faint, diffuse smoke plumes against hazy skies and misty mountain backgrounds in LAB Luminance channel (clipLimit=2.0)."
     ]))
     cells.append(create_code_cell([
@@ -376,7 +376,7 @@ def build_unified_master_notebook():
     
     # Step 5: Splits & Cross-Validation
     cells.append(create_markdown_cell([
-        "## Part 1 • Step 5: Train / Validation / Test Split & 10-Fold Cross-Validation",
+        "## Part 1 - Step 5: Train / Validation / Test Split & 10-Fold Cross-Validation",
         "Partitions the dataset into Train (68%), Validation (12%), and Quarantined Test (20%) splits with mathematical isolation assertions and 10-Fold CV."
     ]))
     cells.append(create_code_cell([
@@ -416,16 +416,16 @@ def build_unified_master_notebook():
         "print('PART 1: RIGOROUS DATASET PARTITIONING (ZERO LEAKAGE CONFIRMED)')",
         "print('=' * 70)",
         "print(f'Total Preprocessed Imagery:  {total_img} frames (100.0%)')",
-        "print(f'  • Training Partition:      {len(train_idx)} frames ({len(train_idx)/total_img*100:.1f}%) -> Model Training & DCGAN Balancing')",
-        "print(f'  • Validation Partition:    {len(val_idx)} frames ({len(val_idx)/total_img*100:.1f}%) -> Hyperparameter Tuning & Overfit Audits')",
-        "print(f'  • Quarantined Test Split:  {len(test_idx)} frames ({len(test_idx)/total_img*100:.1f}%) -> LOCKED for Unseen Evaluation')",
-        "print(f'  • Cross-Validation:        Configured {n_splits}-Fold CV on Training Partition')",
+        "print(f'  - Training Partition:      {len(train_idx)} frames ({len(train_idx)/total_img*100:.1f}%) -> Model Training & DCGAN Balancing')",
+        "print(f'  - Validation Partition:    {len(val_idx)} frames ({len(val_idx)/total_img*100:.1f}%) -> Hyperparameter Tuning & Overfit Audits')",
+        "print(f'  - Quarantined Test Split:  {len(test_idx)} frames ({len(test_idx)/total_img*100:.1f}%) -> LOCKED for Unseen Evaluation')",
+        "print(f'  - Cross-Validation:        Configured {n_splits}-Fold CV on Training Partition')",
         "print('=' * 70)"
     ]))
     
     # Step 6: GAN Augmentation
     cells.append(create_markdown_cell([
-        "## Part 1 • Step 6: GAN Augmentation on TRAINING Data Only",
+        "## Part 1 - Step 6: GAN Augmentation on TRAINING Data Only",
         "Uses a Deep Convolutional GAN (DCGAN) to synthesize realistic minority smoke/flame features. **Validation and Test partitions remain strictly untouched.**"
     ]))
     cells.append(create_code_cell([
@@ -455,7 +455,7 @@ def build_unified_master_notebook():
     
     # Step 7A: Benchmarking 5 Hybrid Image Classifiers BEFORE vs AFTER DCGAN Augmentation
     cells.append(create_markdown_cell([
-        "## Part 1 • Step 7A: Benchmarking 5 Hybrid Image Classifiers BEFORE vs AFTER DCGAN Augmentation",
+        "## Part 1 - Step 7A: Benchmarking 5 Hybrid Image Classifiers BEFORE vs AFTER DCGAN Augmentation",
         "Benchmarks all 5 hybrid deep learning techniques specified in Problem Statement 25, evaluating predictive performance **before DCGAN minority augmentation** (raw imbalanced surveillance frames) versus **after DCGAN augmentation** (balanced flame/smoke representation):",
         "",
         "| Technique | Architecture Components | Primary Role in Forest Fire Monitoring |",
@@ -521,7 +521,7 @@ def build_unified_master_notebook():
         "}",
         "",
         "print('=' * 95)",
-        "print('PART 1 • STEP 7A: 5 HYBRID IMAGE CLASSIFIERS EVALUATION (PRE vs POST AUGMENTATION)')",
+        "print('PART 1 - STEP 7A: 5 HYBRID IMAGE CLASSIFIERS EVALUATION (PRE vs POST AUGMENTATION)')",
         "print('=' * 95)",
         'print(f"{\'Hybrid Architecture\':32s} | {\'Pre-F1\':7s} | {\'Post-F1\':7s} | {\'F1 Gain\':8s} | {\'Pre-Rec\':8s} | {\'Post-Rec\':8s} | {\'Rec Gain\':8s}")',
         "print('-' * 95)",
@@ -541,7 +541,7 @@ def build_unified_master_notebook():
     
     # Step 7B: Cascaded Top-3 Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3 with 3 -> 1 Feedback)
     cells.append(create_markdown_cell([
-        "## Part 1 • Step 7B: Cascaded Top-3 Hybrid Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3 with 3 -> 1 Feedback)",
+        "## Part 1 - Step 7B: Cascaded Top-3 Hybrid Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3 with 3 -> 1 Feedback)",
         "This cell connects the top three architectures into a unified cascaded feature refinement pipeline with dense skip connections and cyclical feedback:",
         "1. **Model 1 (Spatial Feature Extractor & Localizer)**: YOLO + EfficientNet extracts dense multi-scale spatial feature maps $Z_1 \\in \\mathbb{R}^{128}$.",
         "2. **Model 2 (Hierarchical Contextual Attention Refinement)**: Swin Transformer + CNN receives Model 1's output $Z_1$ directly ($1 \\to 2$) and applies shifted-window self-attention to refine plume boundaries, outputting $Z_2 \\in \\mathbb{R}^{128}$.",
@@ -655,7 +655,7 @@ def build_unified_master_notebook():
     
     # Step 8: Overfit Detection
     cells.append(create_markdown_cell([
-        "## Part 1 • Step 8: Overfitting and Underfitting Diagnostic Audit",
+        "## Part 1 - Step 8: Overfitting and Underfitting Diagnostic Audit",
         "Quantifies generalization error and identifies high-variance memorization."
     ]))
     cells.append(create_code_cell([
@@ -670,7 +670,7 @@ def build_unified_master_notebook():
     
     # Step 9: Regularization Retrain
     cells.append(create_markdown_cell([
-        "## Part 1 • Step 9: Regularization Correction and Retraining",
+        "## Part 1 - Step 9: Regularization Correction and Retraining",
         "Applies:",
         "1. Spatial Dropout (p=0.2) and Dense Dropout (p=0.4)",
         "2. Batch Normalization across convolutional stages",
@@ -709,7 +709,7 @@ def build_unified_master_notebook():
     
     # Step 10: Final Evaluation Image
     cells.append(create_markdown_cell([
-        "## Part 1 • Step 10: Final Test Evaluation on Quarantined Partition",
+        "## Part 1 - Step 10: Final Test Evaluation on Quarantined Partition",
         "Evaluates the regularized model exclusively on the held-out test split."
     ]))
     cells.append(create_code_cell([
@@ -739,7 +739,7 @@ def build_unified_master_notebook():
     
     # Step 11: Image Alert Output
     cells.append(create_markdown_cell([
-        "## Part 1 • Step 11: Image Early-Warning Alert Dispatch",
+        "## Part 1 - Step 11: Image Early-Warning Alert Dispatch",
         "Validates visual smoke/fire signatures and formats operational alerts."
     ]))
     cells.append(create_code_cell([
@@ -763,7 +763,7 @@ def build_unified_master_notebook():
     
     # CSV Step 1: Load CSV
     cells.append(create_markdown_cell([
-        "## Part 2 • Step 1: Load CSV Dataset",
+        "## Part 2 - Step 1: Load CSV Dataset",
         "Ingests real NASA Earthdata active fire telemetry (`VIIRS_SouthAsia_India_24h.csv`)."
     ]))
     cells.append(create_code_cell([
@@ -777,7 +777,7 @@ def build_unified_master_notebook():
     
     # CSV Step 2: Preprocessing & 5-Tier Target Formulation
     cells.append(create_markdown_cell([
-        "## Part 2 • Step 2: Data Preprocessing & 5-Tier Severity Target Formulation",
+        "## Part 2 - Step 2: Data Preprocessing & 5-Tier Severity Target Formulation",
         "Imputes missing values and formulates the 5-tier wildfire severity taxonomy (No, Yes / Low, Yes / Moderate, Yes / High, Yes / Critical) along with high-severity fire outbreak detection (natural minority class for SMOTE balancing)."
     ]))
     cells.append(create_code_cell([
@@ -831,7 +831,7 @@ def build_unified_master_notebook():
     
     # CSV Step 3: Leakage Checks
     cells.append(create_markdown_cell([
-        "## Part 2 • Step 3: Tabular Data Leakage Checks",
+        "## Part 2 - Step 3: Tabular Data Leakage Checks",
         "Executes 3 critical checks: Target correlation (|r| < 0.90), duplicate row deduplication, and zero-variance feature removal."
     ]))
     cells.append(create_code_cell([
@@ -849,7 +849,7 @@ def build_unified_master_notebook():
     
     # CSV Step 4: Splits & Scaler on Train Only
     cells.append(create_markdown_cell([
-        "## Part 2 • Step 4: Train / Validation / Test Split & 10-Fold Cross-Validation",
+        "## Part 2 - Step 4: Train / Validation / Test Split & 10-Fold Cross-Validation",
         "Executes a rigorous 2-stage stratified split: Train (65%), Validation (15%), and Quarantined Test (20%). StandardScaler is fit **strictly on Training data only** to eliminate information leakage."
     ]))
     cells.append(create_code_cell([
@@ -895,9 +895,9 @@ def build_unified_master_notebook():
         "print('PART 2: RIGOROUS TABULAR PARTITIONING (ZERO DATA LEAKAGE CONFIRMED)')",
         "print('=' * 85)",
         "print(f'Total NASA Telemetry Pool:   {total_rows:,} rows (100.0%)')",
-        "print(f'  • Training Partition:      {len(X_train_scaled):,} rows ({len(X_train_scaled)/total_rows*100:.1f}%) [Class 0: {sum(y_train_tab==0)}, Class 1: {sum(y_train_tab==1)}]')",
-        "print(f'  • Validation Partition:    {len(X_val_scaled):,} rows ({len(X_val_scaled)/total_rows*100:.1f}%) [Class 0: {sum(y_val_tab==0)}, Class 1: {sum(y_val_tab==1)}]')",
-        "print(f'  • Quarantined Test Split:  {len(X_test_scaled):,} rows ({len(X_test_scaled)/total_rows*100:.1f}%) [Class 0: {sum(y_test_tab==0)}, Class 1: {sum(y_test_tab==1)}] -> LOCKED')",
+        "print(f'  - Training Partition:      {len(X_train_scaled):,} rows ({len(X_train_scaled)/total_rows*100:.1f}%) [Class 0: {sum(y_train_tab==0)}, Class 1: {sum(y_train_tab==1)}]')",
+        "print(f'  - Validation Partition:    {len(X_val_scaled):,} rows ({len(X_val_scaled)/total_rows*100:.1f}%) [Class 0: {sum(y_val_tab==0)}, Class 1: {sum(y_val_tab==1)}]')",
+        "print(f'  - Quarantined Test Split:  {len(X_test_scaled):,} rows ({len(X_test_scaled)/total_rows*100:.1f}%) [Class 0: {sum(y_test_tab==0)}, Class 1: {sum(y_test_tab==1)}] -> LOCKED')",
         "print('=' * 85)",
         "print('DETAILED 5-CLASS ROW BREAKDOWN PER PARTITION:')",
         "for p_name, p_idx in [('Train (65%)', X_train_tab.index), ('Val (15%)', X_val_tab.index), ('Test (20%)', X_test_tab.index)]:",
@@ -908,7 +908,7 @@ def build_unified_master_notebook():
     
     # CSV Step 5: SMOTE on Train Only
     cells.append(create_markdown_cell([
-        "## Part 2 • Step 5: SMOTE Resampling (Applied Strictly on TRAINING Data Only)",
+        "## Part 2 - Step 5: SMOTE Resampling (Applied Strictly on TRAINING Data Only)",
         "Synthesizes minority class feature vectors using k-nearest neighbors. **Validation and test partitions remain untouched with natural class ratios.**"
     ]))
     cells.append(create_code_cell([
@@ -931,7 +931,7 @@ def build_unified_master_notebook():
     
     # CSV Step 6A: Benchmarking 5 Tabular Classifiers BEFORE SMOTE vs AFTER SMOTE
     cells.append(create_markdown_cell([
-        "## Part 2 • Step 6A: Benchmarking 5 Tabular Classifiers BEFORE SMOTE vs AFTER SMOTE",
+        "## Part 2 - Step 6A: Benchmarking 5 Tabular Classifiers BEFORE SMOTE vs AFTER SMOTE",
         "Directly compares the predictive capacity of 5 distinct machine learning architectures trained **before SMOTE** (on raw imbalanced training data) versus **after SMOTE** (on balanced training data), evaluated on the identical quarantined validation partition:",
         "",
         "| Architecture | Paradigm | Strengths in Active Fire Telemetry |",
@@ -952,7 +952,7 @@ def build_unified_master_notebook():
         "}",
         "",
         "print('=' * 95)",
-        "print('PART 2 • STEP 6A: EVALUATING 5 TABULAR CLASSIFIERS BEFORE SMOTE vs AFTER SMOTE')",
+        "print('PART 2 - STEP 6A: EVALUATING 5 TABULAR CLASSIFIERS BEFORE SMOTE vs AFTER SMOTE')",
         "print('=' * 95)",
         "",
         "# 1. Evaluate BEFORE SMOTE (Trained on Raw Imbalanced Training Data)",
@@ -1006,7 +1006,7 @@ def build_unified_master_notebook():
     
     # CSV Step 6B: Tabular Cascaded Top-3 Architecture
     cells.append(create_markdown_cell([
-        "## Part 2 • Step 6B: Cascaded Top-3 Tabular Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)",
+        "## Part 2 - Step 6B: Cascaded Top-3 Tabular Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)",
         "Connects the top 3 tabular models into a dense cascaded feature-refinement pipeline:",
         "1. **Model 1 (Random Forest)**: Processes input features $X$, outputting class probabilities $P_1$.",
         "2. **Model 2 (Multi-Layer Perceptron / MLP)**: Receives $[X, P_1]$ ($1 \\to 2$) and generates intermediate non-linear feature embedding $P_2$.",
@@ -1064,7 +1064,7 @@ def build_unified_master_notebook():
     
     # CSV Step 7: Overfitting Detection
     cells.append(create_markdown_cell([
-        "## Part 2 • Step 7: Overfitting / Underfitting Detection on Cascaded Pipeline"
+        "## Part 2 - Step 7: Overfitting / Underfitting Detection on Cascaded Pipeline"
     ]))
     cells.append(create_code_cell([
         "tab_gap = tab_train_acc - tab_val_acc",
@@ -1077,20 +1077,20 @@ def build_unified_master_notebook():
     
     # CSV Step 8: Correction & Retrain
     cells.append(create_markdown_cell([
-        "## Part 2 • Step 8: Regularized Cascaded Pipeline Retraining",
+        "## Part 2 - Step 8: Regularized Cascaded Pipeline Retraining",
         "Enforces structural tree pruning (`max_depth=4-6`), leaf constraints (`min_samples_leaf=4`), and learning rate shrinkage on the cascaded pipeline to maintain low generalization error."
     ]))
     cells.append(create_code_cell([
         "# Re-verify cascaded validation metrics after regularized configuration",
         "c_val_bal = balanced_accuracy_score(y_val_tab, cascaded_tab_pipeline.predict(X_val_scaled))",
         "print('Regularized Cascaded Pipeline Convergence:')",
-        "print(f'  • Balanced Validation Accuracy: {c_val_bal:.2%}')",
-        "print(f'  • Area Under ROC Curve (ROC-AUC): {tab_val_roc:.4f}')"
+        "print(f'  - Balanced Validation Accuracy: {c_val_bal:.2%}')",
+        "print(f'  - Area Under ROC Curve (ROC-AUC): {tab_val_roc:.4f}')"
     ]))
     
     # CSV Step 9: Final Test Evaluation
     cells.append(create_markdown_cell([
-        "## Part 2 • Step 9: Final Test Evaluation on Quarantined Partition",
+        "## Part 2 - Step 9: Final Test Evaluation on Quarantined Partition",
         "Evaluates the regularized Cascaded Top-3 Tabular Pipeline on the untouched, quarantined test partition."
     ]))
     cells.append(create_code_cell([
@@ -1191,7 +1191,7 @@ def build_image_notebook():
     # 0. Header
     header_lines = [
         "# AI Wildfire Early Detection: Image Classification Pipeline",
-        "### Problem Statement 25 • VIT Tech-a-thon",
+        "### Problem Statement 25 - VIT Tech-a-thon",
         "",
         "[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ssreeakash-cpu/AI-Hackathon/blob/main/notebooks/Image_Classification_Pipeline_Colab.ipynb)",
         "",
@@ -1199,33 +1199,33 @@ def build_image_notebook():
         "",
         "```",
         "Load Image Dataset",
-        "       ↓",
+        "       |",
         "Data Preprocessing",
-        "       ↓",
-        "Data Leakage Checks (Target leakage • duplicate leakage • suspicious features)",
-        "       ↓",
+        "       |",
+        "Data Leakage Checks (Target leakage - duplicate leakage - suspicious features)",
+        "       |",
         "CLAHE (when contrast enhancement is useful)",
-        "       ↓",
+        "       |",
         "1. Train / Validation / Test Split or Train / Test Split",
         "2. 10-fold cross validation",
-        "       ↓",
+        "       |",
         "GAN Augmentation on TRAINING data only",
-        "       ↓",
+        "       |",
         "Initial Model Training (Evaluating 5 Hybrid Techniques):",
         "   1. YOLO + EfficientNet + LSTM",
         "   2. CNN + BiLSTM + Attention",
         "   3. Swin Transformer + CNN",
         "   4. YOLO + Vision Transformer + LSTM",
         "   5. ConvLSTM + Attention",
-        "       ↓",
+        "       |",
         "Cascaded Top-3 Architecture (Model 1 -> Model 2 -> Model 3 -> Result with 3 -> 1 Feedback)",
-        "       ↓",
+        "       |",
         "Overfitting / Underfitting Detection and Rectification",
-        "       ↓",
+        "       |",
         "Apply Correction Technique and Retrain",
-        "       ↓",
+        "       |",
         "Final Test Evaluation",
-        "       ↓",
+        "       |",
         "Output: Fire/smoke detection -> severity estimation -> geographic location -> early-warning alert",
         "```"
     ]
@@ -1439,10 +1439,10 @@ def build_image_notebook():
         "print('IMAGE DATASET PARTITIONING (ZERO LEAKAGE CONFIRMED)')",
         "print('=' * 70)",
         "print(f'Total Preprocessed Imagery:  {total_img} frames (100.0%)')",
-        "print(f'  • Training Partition:      {len(train_idx)} frames ({len(train_idx)/total_img*100:.1f}%) -> Model Training & DCGAN Balancing')",
-        "print(f'  • Validation Partition:    {len(val_idx)} frames ({len(val_idx)/total_img*100:.1f}%) -> Hyperparameter Tuning & Overfit Audits')",
-        "print(f'  • Quarantined Test Split:  {len(test_idx)} frames ({len(test_idx)/total_img*100:.1f}%) -> LOCKED for Unseen Evaluation')",
-        "print(f'  • Cross-Validation:        Configured {n_splits}-Fold CV on Training Partition')",
+        "print(f'  - Training Partition:      {len(train_idx)} frames ({len(train_idx)/total_img*100:.1f}%) -> Model Training & DCGAN Balancing')",
+        "print(f'  - Validation Partition:    {len(val_idx)} frames ({len(val_idx)/total_img*100:.1f}%) -> Hyperparameter Tuning & Overfit Audits')",
+        "print(f'  - Quarantined Test Split:  {len(test_idx)} frames ({len(test_idx)/total_img*100:.1f}%) -> LOCKED for Unseen Evaluation')",
+        "print(f'  - Cross-Validation:        Configured {n_splits}-Fold CV on Training Partition')",
         "print('=' * 70)"
     ]))
     
@@ -1878,7 +1878,7 @@ def build_tabular_notebook():
     # 0. Header
     header_lines = [
         "# AI Wildfire Early Detection: CSV / Tabular Classification Pipeline",
-        "### Problem Statement 25 • VIT Tech-a-thon",
+        "### Problem Statement 25 - VIT Tech-a-thon",
         "",
         "[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ssreeakash-cpu/AI-Hackathon/blob/main/notebooks/CSV_Tabular_Classification_Pipeline_Colab.ipynb)",
         "",
@@ -2063,9 +2063,9 @@ def build_tabular_notebook():
         "print('TABULAR DATASET PARTITIONING (ZERO DATA LEAKAGE CONFIRMED)')",
         "print('=' * 85)",
         "print(f'Total NASA Telemetry Pool:   {total_rows:,} rows (100.0%)')",
-        "print(f'  • Training Partition:      {len(X_train_scaled):,} rows ({len(X_train_scaled)/total_rows*100:.1f}%) [Class 0: {sum(y_train==0)}, Class 1: {sum(y_train==1)}]')",
-        "print(f'  • Validation Partition:    {len(X_val_scaled):,} rows ({len(X_val_scaled)/total_rows*100:.1f}%) [Class 0: {sum(y_val==0)}, Class 1: {sum(y_val==1)}]')",
-        "print(f'  • Quarantined Test Split:  {len(X_test_scaled):,} rows ({len(X_test_scaled)/total_rows*100:.1f}%) [Class 0: {sum(y_test==0)}, Class 1: {sum(y_test==1)}] -> LOCKED')",
+        "print(f'  - Training Partition:      {len(X_train_scaled):,} rows ({len(X_train_scaled)/total_rows*100:.1f}%) [Class 0: {sum(y_train==0)}, Class 1: {sum(y_train==1)}]')",
+        "print(f'  - Validation Partition:    {len(X_val_scaled):,} rows ({len(X_val_scaled)/total_rows*100:.1f}%) [Class 0: {sum(y_val==0)}, Class 1: {sum(y_val==1)}]')",
+        "print(f'  - Quarantined Test Split:  {len(X_test_scaled):,} rows ({len(X_test_scaled)/total_rows*100:.1f}%) [Class 0: {sum(y_test==0)}, Class 1: {sum(y_test==1)}] -> LOCKED')",
         "print('=' * 85)",
         "print('DETAILED 5-CLASS ROW BREAKDOWN PER PARTITION:')",
         "for p_name, p_idx in [('Train (65%)', X_train.index), ('Val (15%)', X_val.index), ('Test (20%)', X_test.index)]:",
@@ -2256,8 +2256,8 @@ def build_tabular_notebook():
     cells.append(create_code_cell([
         "c_val_bal = balanced_accuracy_score(y_val, cascaded_tab_pipeline.predict(X_val_scaled))",
         "print('Regularized Cascaded Pipeline Convergence:')",
-        "print(f'  • Balanced Validation Accuracy: {c_val_bal:.2%}')",
-        "print(f'  • Area Under ROC Curve (ROC-AUC): {tab_val_roc:.4f}')"
+        "print(f'  - Balanced Validation Accuracy: {c_val_bal:.2%}')",
+        "print(f'  - Area Under ROC Curve (ROC-AUC): {tab_val_roc:.4f}')"
     ]))
     
     # 11. Step 9: Final Test Evaluation
