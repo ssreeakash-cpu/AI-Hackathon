@@ -492,10 +492,13 @@ class Model2_Swin_CNN(nn.Module):
         return out2.squeeze(1)
 
 class Model3_BiLSTM_Attention(nn.Module):
-    """Model 3: Temporal Sequence Modeling & Attention Aggregator (CNN + BiLSTM + Attention)."""
+    """Model 3: Temporal Sequence Modeling & Attention Aggregator (CNN + BiLSTM + Attention).
+    Receives out1 directly from Model 1 (1 -> 3 skip connection) and out2 from Model 2 (2 -> 3 connection).
+    """
     def __init__(self, feature_dim=128, num_classes=4):
         super().__init__()
-        self.lstm = nn.LSTM(input_size=feature_dim, hidden_size=64, num_layers=1, 
+        self.fusion_norm = nn.LayerNorm(feature_dim * 2)
+        self.lstm = nn.LSTM(input_size=feature_dim * 2, hidden_size=64, num_layers=1, 
                             bidirectional=True, batch_first=True)
         self.attn = nn.Sequential(
             nn.Linear(128, 64),
@@ -505,22 +508,26 @@ class Model3_BiLSTM_Attention(nn.Module):
         self.classifier = nn.Linear(128, num_classes)
         self.feedback_proj = nn.Linear(128, feature_dim)
         
-    def forward(self, out2):
-        # out2 from Model 2 fed directly into Model 3
-        seq = out2.unsqueeze(1) # [B, 1, 128]
+    def forward(self, out1, out2):
+        # 1 -> 3 (out1 skip connection) & 2 -> 3 (out2 connection) fused into 1 -> 2 -> 3
+        fused = torch.cat([out1, out2], dim=-1) # [B, 256]
+        fused_norm = self.fusion_norm(fused)
+        seq = fused_norm.unsqueeze(1) # [B, 1, 256]
         lstm_out, _ = self.lstm(seq) # [B, 1, 128]
         attn_weights = torch.softmax(self.attn(lstm_out), dim=1)
         context = torch.sum(attn_weights * lstm_out, dim=1) # [B, 128]
-        
         logits = self.classifier(context)
         feedback_3to1 = self.feedback_proj(context)
         return logits, feedback_3to1
 
 class CascadedTop3Pipeline(nn.Module):
     """
-    Cascaded Top-3 Sequential and Cyclical Architecture:
-      Forward Cascade: Model 1 -> Model 2 -> Model 3 -> Result
-      Cyclical Feedback: 3 -> 1 -> 2 -> 3
+    Cascaded Top-3 Pipeline with Dense Skip and Cyclical Feedback:
+      • 1 -> 2: Model 1 output (out1) feeds into Model 2
+      • 1 -> 3: Model 1 output (out1) feeds directly into Model 3 as skip connection
+      • 2 -> 3: Model 2 output (out2) feeds into Model 3
+      • 1 -> 2 -> 3: Model 3 fuses both representations to compute final result
+      • 3 -> 1: Temporal context feedback modulates Model 1 spatial sensitivity
     """
     def __init__(self, num_classes=4, feature_dim=128):
         super().__init__()
@@ -532,11 +539,11 @@ class CascadedTop3Pipeline(nn.Module):
         feedback = None
         logits = None
         for p in range(cyclic_passes):
-            # Pass 1: 1 -> 2 -> 3
-            # Pass 2: 3 -> 1 -> 2 -> 3
+            # Pass 1: 1 -> 2 -> 3 (with 1 -> 3 skip connection)
+            # Pass 2: 3 -> 1 -> 2 -> 3 (Cyclic refinement)
             out1 = self.model1(x, feedback=feedback) # Step 1 (or 3 -> 1 modulation)
-            out2 = self.model2(out1)                 # Step 2: Model 1 output -> Model 2
-            logits, feedback = self.model3(out2)     # Step 3: Model 2 output -> Model 3 -> Result
+            out2 = self.model2(out1)                 # Step 2: 1 -> 2 (Model 1 output into Model 2)
+            logits, feedback = self.model3(out1, out2) # Step 3: 1 -> 3 & 2 -> 3 => Result (1 -> 2 -> 3)
         return logits
 
 def train_cascaded_top3_model(train_loader, val_loader, epochs=6):

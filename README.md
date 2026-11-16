@@ -89,31 +89,61 @@ graph TD
 | **4. YOLO + Vision Transformer + LSTM** | Patch-based detector + ViT multi-head attention + Sequence model | Weakly supervised spatiotemporal modeling: extracts attention across image tiles, tracking spatial growth without requiring dense pixel-level masks |
 | **5. ConvLSTM + Attention** | 2D topology-preserving spatial recurrence + Temporal attention | 10-day multi-spectral satellite NetCDF datacubes: preserves 2D geographic topology while predicting wildfire spread velocity and perimeter expansion |
 
-### Top-3 Cascaded Pipeline Architecture (1 -> 2 -> 3 with 3 -> 1 Feedback)
+### Top-3 Cascaded Pipeline Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)
 
-The top three deep learning architectures are integrated into a sequential and cyclical feature-refinement pipeline:
+Both Image and CSV Tabular pipelines evaluate 5 candidate models, extract the Top 3 architectures, and integrate them into a sequential and dense skip-connected feature refinement cascade:
+
+#### A. Image Modality Top-3 Cascade (with Cyclical 3 -> 1 Feedback)
 
 ```mermaid
 graph LR
     IMG["Raw Image / Frame Tensor<br/>(224x224 RGB)"] --> M1
 
-    subgraph CASCADE["Top-3 Model Sequential Cascade with Cyclical Refinement"]
+    subgraph CASCADE["Image Top-3 Dense Cascade with Cyclical Refinement"]
         M1["Model 1: YOLO + EfficientNet<br/>Stage 1: Spatial Localizer & Feature Extractor<br/>Output: Dense Feature Vector Z1"]
         M2["Model 2: Swin Transformer + CNN<br/>Stage 2: Contextual Shifted-Window Attention<br/>Input: Z1 from Model 1 | Output: Refined Vector Z2"]
-        M3["Model 3: CNN + BiLSTM + Attention<br/>Stage 3: Temporal Recurrence & Attention<br/>Input: Z2 from Model 2 | Output: Final Classification"]
+        M3["Model 3: CNN + BiLSTM + Attention<br/>Stage 3: Dense Temporal Fusion & Attention<br/>Inputs: Z1 (1->3 Skip) + Z2 (2->3) | Output: Logits"]
 
-        M1 -->|Output Z1 feeds as Input| M2
-        M2 -->|Output Z2 feeds as Input| M3
-        M3 -.->|Cyclical Feedback 3 -> 1: Temporal Attention Prior Modulates Model 1| M1
+        M1 -->|1 -> 2: Output Z1 feeds into Model 2| M2
+        M1 -->|1 -> 3: Direct Skip Connection| M3
+        M2 -->|2 -> 3: Output Z2 feeds into Model 3| M3
+        M3 -.->|3 -> 1: Temporal Attention Modulation Prior| M1
     end
 
-    M3 --> RES["Final Decision & Early-Warning Output<br/>Fire/Smoke Detection -> Severity Estimation -> Location -> Alert"]
+    M3 --> RES["Final Image Alert Output<br/>Fire/Smoke Detection -> Severity Estimation -> Location -> Alert"]
 ```
 
-* **Model 1 $\rightarrow$ Model 2**: Model 1 (YOLO + EfficientNet) extracts localized spatial activations from raw camera and satellite frames, projecting candidate regions into feature embedding $Z_1 \in \mathbb{R}^{128}$. This output vector $Z_1$ is fed directly as the input sequence to Model 2.
-* **Model 2 $\rightarrow$ Model 3**: Model 2 (Swin Transformer + CNN) applies multi-head shifted-window self-attention across tokens derived from $Z_1$, separating diffuse smoke textures from lookalike clouds and fog, producing refined representation $Z_2 \in \mathbb{R}^{128}$. This output is fed directly into Model 3.
-* **Model 3 $\rightarrow$ Final Output**: Model 3 (CNN + BiLSTM + Attention) models temporal forward and backward sequence dynamics over $Z_2$, using attention weights to emphasize frames with rapid plume expansion and outputting final multi-class probabilities and severity.
-* **Cyclical Feedback ($3 \rightarrow 1$)**: High-level temporal context from Model 3 ($3 \rightarrow 1$) is fed back as an auxiliary prior to Model 1, dynamically gating spatial receptive sensitivity for a refined second evaluation pass ($3 \rightarrow 1 \rightarrow 2 \rightarrow 3$).
+* **1 $\rightarrow$ 2**: Model 1 (YOLO + EfficientNet) extracts localized spatial activations from raw camera/satellite frames, projecting candidate regions into feature embedding $Z_1 \in \mathbb{R}^{128}$. This output vector $Z_1$ is fed directly as the input sequence to Model 2.
+* **1 $\rightarrow$ 3 (Direct Skip Connection)**: Vector $Z_1$ is simultaneously forwarded directly to Model 3 via a residual skip connection, preserving low-level spatial geometry and uncompressed local features.
+* **2 $\rightarrow$ 3**: Model 2 (Swin Transformer + CNN) applies multi-head shifted-window self-attention across tokens derived from $Z_1$, producing refined representation $Z_2 \in \mathbb{R}^{128}$ which feeds directly into Model 3.
+* **1 $\rightarrow$ 2 $\rightarrow$ 3 (Dense Aggregation)**: Model 3 fuses $[Z_1; Z_2] \in \mathbb{R}^{256}$, processes bidirectional temporal recurrence and dynamic attention pooling over the combined representation, and outputs final classification probabilities.
+* **Cyclical Feedback ($3 \rightarrow 1$)**: High-level temporal context from Model 3 is projected back to Model 1 to modulate spatial receptive sensitivity for a refined second pass ($3 \rightarrow 1 \rightarrow 2 \rightarrow 3$).
+
+#### B. CSV Tabular Modality Top-3 Cascade
+
+```mermaid
+graph LR
+    TAB["Scaled NASA Telemetry X<br/>(FRP, Brightness, Angles)"] --> TM1
+    TAB --> TM2
+    TAB --> TM3
+
+    subgraph TAB_CASCADE["Tabular Top-3 Dense Feature Cascade"]
+        TM1["Model 1: Random Forest<br/>Bagging Probability Engine<br/>Output: Class Probs P1"]
+        TM2["Model 2: MLP Neural Net<br/>Deep Latent Interaction Encoder<br/>Inputs: [X, P1] | Output: Embedding P2"]
+        TM3["Model 3: Gradient Boosting<br/>Sequential Ensemble Calibrator<br/>Inputs: [X, P1, P2] | Output: Final Result"]
+
+        TM1 -->|1 -> 2: Output P1 feeds into Model 2| TM2
+        TM1 -->|1 -> 3: Direct Skip Connection P1| TM3
+        TM2 -->|2 -> 3: Output P2 feeds into Model 3| TM3
+    end
+
+    TM3 --> TAB_RES["Final Tabular Severity Output<br/>Binary High-Severity Wildfire Prediction"]
+```
+
+* **1 $\rightarrow$ 2**: Model 1 (Random Forest) computes bagging class probabilities $P_1$ from input features $X$. $P_1$ is concatenated with $X$ to serve as augmented input for Model 2.
+* **1 $\rightarrow$ 3 (Direct Skip Connection)**: Probability distribution $P_1$ is fed directly into Model 3 via skip connection, ensuring baseline bagging consensus is directly accessible to the final booster.
+* **2 $\rightarrow$ 3**: Model 2 (Multi-Layer Perceptron) encodes non-linear latent feature interactions between $X$ and $P_1$, outputting refined intermediate representation $P_2$.
+* **1 $\rightarrow$ 2 $\rightarrow$ 3 (Dense Aggregation)**: Model 3 (Regularized Gradient Boosting) trains on the concatenated representation $[X, P_1, P_2]$, integrating predictions from all preceding models to generate the final calibrated fire severity prediction.
 
 ---
 
