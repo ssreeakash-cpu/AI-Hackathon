@@ -2315,12 +2315,196 @@ def build_tabular_notebook():
     print(f"[Generated Notebook] {path}")
     return path
 
+
+def process_csv_notebook():
+    path = 'notebooks/CSV_Tabular_Classification_Pipeline_Colab.ipynb'
+    with open(path, 'r', encoding='utf-8') as f:
+        nb = json.load(f)
+    
+    cell_titles = {
+        1: ("markdown", "# [Cell 01] AI Wildfire Early Detection: CSV / Tabular Classification Pipeline"),
+        2: ("markdown", "## [Cell 02] Step 0: Clone Repository and Configure Environment"),
+        3: ("code", "# ==============================================================================\n# [CELL 03 - CODE] STEP 0: CLONE REPOSITORY AND CONFIGURE ENVIRONMENT\n# =============================================================================="),
+        4: ("markdown", "## [Cell 04] Engineering Lifecycle Roadmap & Methodology Schedule (Gantt Chart)"),
+        5: ("code", "# ==============================================================================\n# [CELL 05 - CODE] ROADMAP: GENERATE GANTT CHART & METHODOLOGY SCHEDULE\n# =============================================================================="),
+        6: ("markdown", "## [Cell 06] Step 1: Ingest CSV Telemetry Dataset"),
+        7: ("code", "# ==============================================================================\n# [CELL 07 - CODE] STEP 1: INGEST AND VALIDATE CSV TELEMETRY DATASETS\n# =============================================================================="),
+        8: ("markdown", "## [Cell 08] Step 2: Row Counts & 5-Tier Severity Target Formulation (No vs Yes: Low, Moderate, High, Critical)"),
+        9: ("code", "# ==============================================================================\n# [CELL 09 - CODE] STEP 2: COMPUTE ROW COUNTS & 5-TIER SEVERITY TARGET FORMULATION\n# Tiers: No Fire (Noise), Yes / Low, Yes / Moderate, Yes / High, Yes / Critical\n# =============================================================================="),
+        10: ("markdown", "## [Cell 10] Step 3: Tabular Data Leakage Verification Audits"),
+        11: ("code", "# ==============================================================================\n# [CELL 11 - CODE] STEP 3: EXECUTE TABULAR DATA LEAKAGE & DUPLICATE AUDITS\n# =============================================================================="),
+        12: ("markdown", "## [Cell 12] Step 4: Stratified Partitioning (65% Train / 15% Val / 20% Test) and 10-Fold CV"),
+        13: ("code", "# ==============================================================================\n# [CELL 13 - CODE] STEP 4: STRATIFIED TRAIN (65%) / VAL (15%) / TEST (20%) PARTITIONING\n# =============================================================================="),
+        14: ("markdown", "## [Cell 14] Step 5: SMOTE Resampling on TRAINING Data Only (Before SMOTE vs After SMOTE)"),
+        15: ("code", "# ==============================================================================\n# [CELL 15 - CODE] STEP 5: SMOTE RESAMPLING ON TRAINING DATA ONLY (BEFORE vs AFTER)\n# Balanced Training Rows: +552 Synthetic Samples Generated\n# =============================================================================="),
+        16: ("markdown", "## [Cell 16] Step 6A: Benchmarking 5 Tabular Classifiers BEFORE SMOTE vs AFTER SMOTE"),
+        17: ("code", "# ==============================================================================\n# [CELL 17 - CODE] STEP 6A: BENCHMARK 5 TABULAR CLASSIFIERS BEFORE vs AFTER SMOTE\n# Models: Random Forest, MLP, Gradient Boosting, Extra Trees, HistGradientBoosting\n# =============================================================================="),
+        18: ("markdown", "## [Cell 18] Step 6B: Cascaded Top-3 Tabular Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)"),
+        19: ("code", "# ==============================================================================\n# [CELL 19 - CODE] STEP 6B: CASCADED TOP-3 TABULAR ARCHITECTURE (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)\n# =============================================================================="),
+        20: ("markdown", "## [Cell 20] Step 7: Overfitting and Underfitting Diagnostic Audit on Cascaded Pipeline"),
+        21: ("code", "# ==============================================================================\n# [CELL 21 - CODE] STEP 7: OVERFITTING & UNDERFITTING DIAGNOSTIC AUDIT\n# =============================================================================="),
+        22: ("markdown", "## [Cell 22] Step 8: Regularized Cascaded Pipeline Retraining"),
+        23: ("code", "# ==============================================================================\n# [CELL 23 - CODE] STEP 8: REGULARIZED CASCADED PIPELINE RETRAINING\n# =============================================================================="),
+        24: ("markdown", "## [Cell 24] Step 9: Final Test Evaluation on Quarantined Partition & Performance Metrics"),
+        25: ("code", "# ==============================================================================\n# [CELL 25 - CODE] STEP 9: FINAL TEST EVALUATION ON QUARANTINED PARTITION & METRICS\n# ==============================================================================")
+    }
+
+    apply_titles(nb, cell_titles)
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(nb, f, indent=1)
+    print(f"Updated {path} ({len(nb['cells'])} cells)")
+
+def process_image_notebook():
+    path = 'notebooks/Image_Classification_Pipeline_Colab.ipynb'
+    with open(path, 'r', encoding='utf-8') as f:
+        nb = json.load(f)
+    
+    cell_titles = {
+        1: ("markdown", "# [Cell 01] AI Wildfire Early Detection: Image Classification Pipeline"),
+        2: ("markdown", "## [Cell 02] Step 0: Clone Repository and Configure Environment"),
+        3: ("code", "# ==============================================================================\n# [CELL 03 - CODE] STEP 0: CLONE REPOSITORY AND CONFIGURE ENVIRONMENT\n# =============================================================================="),
+        4: ("markdown", "## [Cell 04] Engineering Lifecycle Roadmap & Methodology Schedule (Gantt Chart)"),
+        5: ("code", "# ==============================================================================\n# [CELL 05 - CODE] ROADMAP: GENERATE GANTT CHART & METHODOLOGY SCHEDULE\n# =============================================================================="),
+        6: ("markdown", "## [Cell 06] Step 1: Ingest Image Dataset"),
+        7: ("code", "# ==============================================================================\n# [CELL 07 - CODE] STEP 1: INGEST IMAGE DATASET & RECURSIVE DIRECTORY SCAN\n# =============================================================================="),
+        8: ("markdown", "## [Cell 08] Step 2: Image Frame Counts & 4-Tier Severity Breakdown (No Fire vs Smoke/Flame)"),
+        9: ("code", "# ==============================================================================\n# [CELL 09 - CODE] STEP 2: IMAGE PREPROCESSING & FRAME COUNTS SEVERITY BREAKDOWN\n# =============================================================================="),
+        10: ("markdown", "## [Cell 10] Step 3: Rigorous Data Leakage Verification Audits"),
+        11: ("code", "# ==============================================================================\n# [CELL 11 - CODE] STEP 3: RUN IMAGE DATA LEAKAGE & DUPLICATE AUDITS\n# =============================================================================="),
+        12: ("markdown", "## [Cell 12] Step 4: Contrast Limited Adaptive Histogram Equalization (CLAHE)"),
+        13: ("code", "# ==============================================================================\n# [CELL 13 - CODE] STEP 4: APPLY CLAHE HISTOGRAM EQUALIZATION ENHANCEMENT\n# =============================================================================="),
+        14: ("markdown", "## [Cell 14] Step 5: Dataset Partitioning Protocol (65% Train / 15% Val / 20% Test) and 10-Fold CV"),
+        15: ("code", "# ==============================================================================\n# [CELL 15 - CODE] STEP 5: STRATIFIED TRAIN / VAL / TEST SPLIT & 10-FOLD CV SETUP\n# =============================================================================="),
+        16: ("markdown", "## [Cell 16] Step 6: GAN Augmentation on TRAINING Data Only (Before vs After DCGAN)"),
+        17: ("code", "# ==============================================================================\n# [CELL 17 - CODE] STEP 6: DCGAN GENERATIVE SYNTHESIS & MINORITY AUGMENTATION\n# =============================================================================="),
+        18: ("markdown", "## [Cell 18] Step 7A: Benchmarking 5 Hybrid Image Classifiers BEFORE vs AFTER DCGAN Augmentation"),
+        19: ("code", "# ==============================================================================\n# [CELL 19 - CODE] STEP 7A: BENCHMARK 5 HYBRID IMAGE CLASSIFIERS BEFORE vs AFTER AUGMENTATION\n# Architectures: YOLO+EffNet, Swin+CNN, CNN+BiLSTM, ResNet+SE, ViT\n# =============================================================================="),
+        20: ("markdown", "## [Cell 20] Step 7B: Cascaded Top-3 Hybrid Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3 with Feedback)"),
+        21: ("code", "# ==============================================================================\n# [CELL 21 - CODE] STEP 7B: CASCADED TOP-3 HYBRID ARCHITECTURE WITH CYCLICAL FEEDBACK\n# =============================================================================="),
+        22: ("markdown", "## [Cell 22] Step 8: Overfitting and Underfitting Diagnostic Audit"),
+        23: ("code", "# ==============================================================================\n# [CELL 23 - CODE] STEP 8: OVERFITTING & UNDERFITTING DIAGNOSTIC AUDIT\n# =============================================================================="),
+        24: ("markdown", "## [Cell 24] Step 9: Regularization Correction and Retraining"),
+        25: ("code", "# ==============================================================================\n# [CELL 25 - CODE] STEP 9: REGULARIZED MODEL TUNING & RETRAINING\n# =============================================================================="),
+        26: ("markdown", "## [Cell 26] Step 10: Final Test Evaluation on Quarantined Partition"),
+        27: ("code", "# ==============================================================================\n# [CELL 27 - CODE] STEP 10: QUARANTINED TEST EVALUATION & METRICS\n# =============================================================================="),
+        28: ("markdown", "## [Cell 28] Step 11: System Output (Fire/Smoke Detection -> Severity -> Location -> Early-Warning Alert)"),
+        29: ("code", "# ==============================================================================\n# [CELL 29 - CODE] STEP 11: SYSTEM OUTPUT & EARLY-WARNING ALERT DISPATCH\n# ==============================================================================")
+    }
+
+    apply_titles(nb, cell_titles)
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(nb, f, indent=1)
+    print(f"Updated {path} ({len(nb['cells'])} cells)")
+
+def process_unified_notebook():
+    path = 'notebooks/Unified_Multimodal_Pipeline_Colab.ipynb'
+    with open(path, 'r', encoding='utf-8') as f:
+        nb = json.load(f)
+    
+    cell_titles = {
+        1: ("markdown", "# [Cell 01] Unified AI Wildfire Early Detection: Two Complete Workflows One Below Another"),
+        2: ("markdown", "## [Cell 02] Step 0: Clone Repository and Configure Environment"),
+        3: ("code", "# ==============================================================================\n# [CELL 03 - CODE] STEP 0: CLONE REPOSITORY AND CONFIGURE ENVIRONMENT\n# =============================================================================="),
+        4: ("markdown", "## [Cell 04] Engineering Lifecycle Roadmap & Methodology Schedule (Gantt Chart)"),
+        5: ("code", "# ==============================================================================\n# [CELL 05 - CODE] ROADMAP: GENERATE GANTT CHART & METHODOLOGY SCHEDULE\n# =============================================================================="),
+        6: ("markdown", "# [Cell 06] ======================================================================\n# [Cell 06] PART 1: FLOWCHART 1 - IMAGE CLASSIFICATION PIPELINE\n# [Cell 06] ======================================================================"),
+        7: ("markdown", "## [Cell 07] Part 1 - Step 1: Load Image Dataset"),
+        8: ("code", "# ==============================================================================\n# [CELL 08 - CODE] PART 1 - STEP 1: LOAD IMAGE DATASET\n# =============================================================================="),
+        9: ("markdown", "## [Cell 09] Part 1 - Step 2: Image Frame Counts & 4-Tier Severity Breakdown"),
+        10: ("code", "# ==============================================================================\n# [CELL 10 - CODE] PART 1 - STEP 2: IMAGE PREPROCESSING & FRAME COUNTS SEVERITY BREAKDOWN\n# =============================================================================="),
+        11: ("markdown", "## [Cell 11] Part 1 - Step 3: Rigorous Image Data Leakage Checks"),
+        12: ("code", "# ==============================================================================\n# [CELL 12 - CODE] PART 1 - STEP 3: RUN IMAGE DATA LEAKAGE AUDITS\n# =============================================================================="),
+        13: ("markdown", "## [Cell 13] Part 1 - Step 4: Contrast Limited Adaptive Histogram Equalization (CLAHE)"),
+        14: ("code", "# ==============================================================================\n# [CELL 14 - CODE] PART 1 - STEP 4: APPLY CLAHE ENHANCEMENT\n# =============================================================================="),
+        15: ("markdown", "## [Cell 15] Part 1 - Step 5: Train / Validation / Test Split (65% / 15% / 20%) & 10-Fold CV"),
+        16: ("code", "# ==============================================================================\n# [CELL 16 - CODE] PART 1 - STEP 5: STRATIFIED PARTITIONING PROTOCOL (65/15/20)\n# =============================================================================="),
+        17: ("markdown", "## [Cell 17] Part 1 - Step 6: GAN Augmentation on TRAINING Data Only (Before vs After DCGAN)"),
+        18: ("code", "# ==============================================================================\n# [CELL 18 - CODE] PART 1 - STEP 6: GENERATIVE ADVERSARIAL MINORITY AUGMENTATION\n# =============================================================================="),
+        19: ("markdown", "## [Cell 19] Part 1 - Step 7A: Benchmarking 5 Hybrid Image Classifiers BEFORE vs AFTER DCGAN Augmentation"),
+        20: ("code", "# ==============================================================================\n# [CELL 20 - CODE] PART 1 - STEP 7A: BENCHMARK 5 HYBRID IMAGE CLASSIFIERS\n# Architectures: YOLO+EffNet, Swin+CNN, CNN+BiLSTM, ResNet+SE, ViT\n# =============================================================================="),
+        21: ("markdown", "## [Cell 21] Part 1 - Step 7B: Cascaded Top-3 Hybrid Architecture (with Cyclical Feedback)"),
+        22: ("code", "# ==============================================================================\n# [CELL 22 - CODE] PART 1 - STEP 7B: CASCADED TOP-3 HYBRID INTEGRATION (WITH CYCLICAL FEEDBACK)\n# =============================================================================="),
+        23: ("markdown", "## [Cell 23] Part 1 - Step 8: Overfitting and Underfitting Diagnostic Audit"),
+        24: ("code", "# ==============================================================================\n# [CELL 24 - CODE] PART 1 - STEP 8: OVERFITTING DIAGNOSTIC AUDIT\n# =============================================================================="),
+        25: ("markdown", "## [Cell 25] Part 1 - Step 9: Regularization Correction and Retraining"),
+        26: ("code", "# ==============================================================================\n# [CELL 26 - CODE] PART 1 - STEP 9: REGULARIZED MODEL RETRAINING\n# =============================================================================="),
+        27: ("markdown", "## [Cell 27] Part 1 - Step 10: Final Test Evaluation on Quarantined Partition"),
+        28: ("code", "# ==============================================================================\n# [CELL 28 - CODE] PART 1 - STEP 10: QUARANTINED TEST EVALUATION\n# =============================================================================="),
+        29: ("markdown", "## [Cell 29] Part 1 - Step 11: Image Early-Warning Alert Dispatch"),
+        30: ("code", "# ==============================================================================\n# [CELL 30 - CODE] PART 1 - STEP 11: IMAGE ALERT DISPATCH\n# =============================================================================="),
+        31: ("markdown", "# [Cell 31] ======================================================================\n# [Cell 31] PART 2: FLOWCHART 2 - CSV / TABULAR CLASSIFICATION & CLASS IMBALANCE HANDLING\n# [Cell 31] ======================================================================"),
+        32: ("markdown", "## [Cell 32] Part 2 - Step 1: Load CSV Dataset"),
+        33: ("code", "# ==============================================================================\n# [CELL 33 - CODE] PART 2 - STEP 1: LOAD CSV TELEMETRY DATASET\n# =============================================================================="),
+        34: ("markdown", "## [Cell 34] Part 2 - Step 2: Row Counts & 5-Tier Severity Target Formulation (No vs Yes: Low, Mod, High, Crit)"),
+        35: ("code", "# ==============================================================================\n# [CELL 35 - CODE] PART 2 - STEP 2: COMPUTE ROW COUNTS & 5-TIER SEVERITY TARGET FORMULATION\n# =============================================================================="),
+        36: ("markdown", "## [Cell 36] Part 2 - Step 3: Tabular Data Leakage Checks"),
+        37: ("code", "# ==============================================================================\n# [CELL 37 - CODE] PART 2 - STEP 3: RUN TABULAR DATA LEAKAGE CHECKS\n# =============================================================================="),
+        38: ("markdown", "## [Cell 38] Part 2 - Step 4: Train / Validation / Test Split (65% / 15% / 20%) & 10-Fold CV"),
+        39: ("code", "# ==============================================================================\n# [CELL 39 - CODE] PART 2 - STEP 4: STRATIFIED PARTITIONING PROTOCOL (65/15/20)\n# =============================================================================="),
+        40: ("markdown", "## [Cell 40] Part 2 - Step 5: SMOTE Resampling (Applied Strictly on TRAINING Data Only)"),
+        41: ("code", "# ==============================================================================\n# [CELL 41 - CODE] PART 2 - STEP 5: SMOTE RESAMPLING ON TRAINING ONLY (BEFORE vs AFTER)\n# =============================================================================="),
+        42: ("markdown", "## [Cell 42] Part 2 - Step 6A: Benchmarking 5 Tabular Classifiers BEFORE SMOTE vs AFTER SMOTE"),
+        43: ("code", "# ==============================================================================\n# [CELL 43 - CODE] PART 2 - STEP 6A: BENCHMARK 5 TABULAR CLASSIFIERS BEFORE vs AFTER SMOTE\n# Models: Random Forest, MLP, Gradient Boosting, Extra Trees, HistGradientBoosting\n# =============================================================================="),
+        44: ("markdown", "## [Cell 44] Part 2 - Step 6B: Cascaded Top-3 Tabular Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)"),
+        45: ("code", "# ==============================================================================\n# [CELL 45 - CODE] PART 2 - STEP 6B: CASCADED TOP-3 TABULAR INTEGRATION (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)\n# =============================================================================="),
+        46: ("markdown", "## [Cell 46] Part 2 - Step 7: Overfitting / Underfitting Detection on Cascaded Pipeline"),
+        47: ("code", "# ==============================================================================\n# [CELL 47 - CODE] PART 2 - STEP 7: GENERALIZATION GAP & OVERFITTING DIAGNOSTICS\n# =============================================================================="),
+        48: ("markdown", "## [Cell 48] Part 2 - Step 8: Regularized Cascaded Pipeline Retraining"),
+        49: ("code", "# ==============================================================================\n# [CELL 49 - CODE] PART 2 - STEP 8: REGULARIZED MODEL RETRAINING\n# =============================================================================="),
+        50: ("markdown", "## [Cell 50] Part 2 - Step 9: Final Test Evaluation on Quarantined Partition"),
+        51: ("code", "# ==============================================================================\n# [CELL 51 - CODE] PART 2 - STEP 9: FINAL TEST EVALUATION ON QUARANTINED PARTITION\n# =============================================================================="),
+        52: ("markdown", "# [Cell 52] ======================================================================\n# [Cell 52] PART 3: MULTIMODAL DECISION FUSION & OPERATIONAL EARLY-WARNING DISPATCH\n# [Cell 52] ======================================================================"),
+        53: ("code", "# ==============================================================================\n# [CELL 53 - CODE] PART 3: MULTIMODAL DECISION FUSION & OPERATIONAL EARLY-WARNING DISPATCH\n# ==============================================================================")
+    }
+
+    apply_titles(nb, cell_titles)
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(nb, f, indent=1)
+    print(f"Updated {path} ({len(nb['cells'])} cells)")
+
+def apply_titles(nb, cell_titles):
+    for idx, (ctype, header) in cell_titles.items():
+        cell = nb['cells'][idx - 1]
+        src = cell['source']
+        if ctype == 'markdown':
+            # replace or update first line
+            new_lines = []
+            header_lines = [h + '\n' for h in header.split('\n')]
+            # if first line in src was a markdown header (#), replace it
+            found_header = False
+            for line in src:
+                if not found_header and line.strip().startswith('#'):
+                    new_lines.extend(header_lines)
+                    found_header = True
+                else:
+                    new_lines.append(line)
+            if not found_header:
+                new_lines = header_lines + ['\n'] + src
+            cell['source'] = new_lines
+        elif ctype == 'code':
+            # prepend or update header banner
+            banner_lines = [b + '\n' for b in header.split('\n')]
+            # remove any old banner at start if present
+            cleaned_src = []
+            skipping = False
+            for line in src:
+                if line.strip().startswith('# [CELL'):
+                    continue
+                if line.strip() == '# ' + '=' * 78:
+                    continue
+                cleaned_src.append(line)
+            cell['source'] = banner_lines + ['\n'] + cleaned_src
+
 def main():
     print("Generating Google Colab Notebooks...")
     nb_u = build_unified_master_notebook()
     nb_img = build_image_notebook()
     nb_tab = build_tabular_notebook()
-    print("All 3 Google Colab notebooks generated successfully!")
+    print("Applying explicit standardized cell names across all notebooks...")
+    process_csv_notebook()
+    process_image_notebook()
+    process_unified_notebook()
+    print("All 3 Google Colab notebooks generated and explicitly named successfully!")
 
 if __name__ == "__main__":
     main()
