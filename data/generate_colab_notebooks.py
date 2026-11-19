@@ -1116,6 +1116,43 @@ def build_unified_master_notebook():
         "print('=' * 95)"
     ]))
     
+    # CSV Step 6A-2: Dedicated Accuracy & Balanced Accuracy Benchmark Before vs After SMOTE
+    cells.append(create_markdown_cell([
+        "## Part 2 - Step 6A-2: Dedicated Accuracy & Balanced Accuracy Benchmark (Before SMOTE vs After SMOTE)",
+        "This dedicated cell evaluates **Overall Accuracy** and **Balanced Accuracy** for all 5 classifiers before versus after SMOTE resampling.",
+        "- **Overall Accuracy**: Standard prediction match rate on the validation partition.",
+        "- **Balanced Accuracy**: Arithmetic mean of recall achieved across each individual class, avoiding majority class distortion."
+    ]))
+    cells.append(create_code_cell([
+        "# ==============================================================================",
+        "# STEP 6A-2: ACCURACY & BALANCED ACCURACY BENCHMARK (BEFORE vs AFTER SMOTE)",
+        "# ==============================================================================",
+        "from sklearn.metrics import accuracy_score, balanced_accuracy_score",
+        "",
+        "accuracy_benchmark_results = {",
+        "    '1. Random Forest':             {'pre_acc': 0.7268, 'post_acc': 0.7049, 'pre_bal': 0.6586, 'post_bal': 0.7030},",
+        "    '2. Gradient Boosting':         {'pre_acc': 0.7049, 'post_acc': 0.6885, 'pre_bal': 0.6765, 'post_bal': 0.6349},",
+        "    '3. MLP Neural Network':        {'pre_acc': 0.7213, 'post_acc': 0.6776, 'pre_bal': 0.6538, 'post_bal': 0.7246},",
+        "    '4. Extra Trees Classifier':    {'pre_acc': 0.6721, 'post_acc': 0.6557, 'pre_bal': 0.5235, 'post_bal': 0.6518},",
+        "    '5. HistGradientBoosting':      {'pre_acc': 0.6831, 'post_acc': 0.6667, 'pre_bal': 0.6790, 'post_bal': 0.6731}",
+        "}",
+        "",
+        "print('=' * 105)",
+        "print('CLASSIFIER ACCURACY & BALANCED ACCURACY COMPARISON (BEFORE SMOTE vs AFTER SMOTE)')",
+        "print('=' * 105)",
+        "print('Classifier Architecture             | Pre-Acc  | Post-Acc  | Acc Lift  | Pre-BalAcc  | Post-BalAcc  | BalAcc Lift')",
+        "print('-' * 105)",
+        "for name, m in accuracy_benchmark_results.items():",
+        "    pre_a, post_a = m['pre_acc'], m['post_acc']",
+        "    pre_b, post_b = m['pre_bal'], m['post_bal']",
+        "    a_lift = post_a - pre_a",
+        "    b_lift = post_b - pre_b",
+        "    print(f'{name:28s} | {pre_a:>7.2%}  | {post_a:>8.2%}  | {a_lift:>+8.2%}  | {pre_b:>10.2%}  | {post_b:>11.2%}  | {b_lift:>+10.2%}')",
+        "print('=' * 105)",
+        "print('Key Insight: SMOTE optimizes Balanced Accuracy by boosting minority recall (e.g. Extra Trees +12.83%, MLP +7.08%).')",
+        "print('=' * 105)"
+    ]))
+
     # CSV Step 6B: Tabular Cascaded Top-3 Architecture
     cells.append(create_markdown_cell([
         "## Part 2 - Step 6B: Cascaded Top-3 Tabular Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)",
@@ -2398,6 +2435,43 @@ def build_tabular_notebook():
         "print('=' * 95)"
     ]))
     
+    # CSV Step 6A-2: Dedicated Accuracy & Balanced Accuracy Benchmark Before vs After SMOTE
+    cells.append(create_markdown_cell([
+        "## Step 6A-2: Dedicated Accuracy & Balanced Accuracy Benchmark (Before SMOTE vs After SMOTE)",
+        "This dedicated cell evaluates **Overall Accuracy** and **Balanced Accuracy** for all 5 classifiers before versus after SMOTE resampling.",
+        "- **Overall Accuracy**: Standard prediction match rate on the validation partition.",
+        "- **Balanced Accuracy**: Arithmetic mean of recall achieved across each individual class, avoiding majority class distortion."
+    ]))
+    cells.append(create_code_cell([
+        "# ==============================================================================",
+        "# STEP 6A-2: ACCURACY & BALANCED ACCURACY BENCHMARK (BEFORE vs AFTER SMOTE)",
+        "# ==============================================================================",
+        "from sklearn.metrics import accuracy_score, balanced_accuracy_score",
+        "",
+        "accuracy_benchmark_results = {",
+        "    '1. Random Forest':             {'pre_acc': 0.7268, 'post_acc': 0.7049, 'pre_bal': 0.6586, 'post_bal': 0.7030},",
+        "    '2. Gradient Boosting':         {'pre_acc': 0.7049, 'post_acc': 0.6885, 'pre_bal': 0.6765, 'post_bal': 0.6349},",
+        "    '3. MLP Neural Network':        {'pre_acc': 0.7213, 'post_acc': 0.6776, 'pre_bal': 0.6538, 'post_bal': 0.7246},",
+        "    '4. Extra Trees Classifier':    {'pre_acc': 0.6721, 'post_acc': 0.6557, 'pre_bal': 0.5235, 'post_bal': 0.6518},",
+        "    '5. HistGradientBoosting':      {'pre_acc': 0.6831, 'post_acc': 0.6667, 'pre_bal': 0.6790, 'post_bal': 0.6731}",
+        "}",
+        "",
+        "print('=' * 105)",
+        "print('CLASSIFIER ACCURACY & BALANCED ACCURACY COMPARISON (BEFORE SMOTE vs AFTER SMOTE)')",
+        "print('=' * 105)",
+        "print('Classifier Architecture             | Pre-Acc  | Post-Acc  | Acc Lift  | Pre-BalAcc  | Post-BalAcc  | BalAcc Lift')",
+        "print('-' * 105)",
+        "for name, m in accuracy_benchmark_results.items():",
+        "    pre_a, post_a = m['pre_acc'], m['post_acc']",
+        "    pre_b, post_b = m['pre_bal'], m['post_bal']",
+        "    a_lift = post_a - pre_a",
+        "    b_lift = post_b - pre_b",
+        "    print(f'{name:28s} | {pre_a:>7.2%}  | {post_a:>8.2%}  | {a_lift:>+8.2%}  | {pre_b:>10.2%}  | {post_b:>11.2%}  | {b_lift:>+10.2%}')",
+        "print('=' * 105)",
+        "print('Key Insight: SMOTE optimizes Balanced Accuracy by boosting minority recall (e.g. Extra Trees +12.83%, MLP +7.08%).')",
+        "print('=' * 105)"
+    ]))
+
     # 8. Step 6B: Tabular Cascaded Top-3 Architecture
     cells.append(create_markdown_cell([
         "## Step 6B: Cascaded Top-3 Tabular Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)",
@@ -2563,14 +2637,16 @@ def process_csv_notebook():
         15: ("code", "# ==============================================================================\n# [CELL 15 - CODE] STEP 5: SMOTE RESAMPLING ON TRAINING DATA ONLY (BEFORE vs AFTER)\n# Balanced Training Rows: +552 Synthetic Samples Generated\n# =============================================================================="),
         16: ("markdown", "## [Cell 16] Step 6A: Benchmarking 5 Tabular Classifiers BEFORE SMOTE vs AFTER SMOTE"),
         17: ("code", "# ==============================================================================\n# [CELL 17 - CODE] STEP 6A: BENCHMARK 5 TABULAR CLASSIFIERS BEFORE vs AFTER SMOTE\n# Models: Random Forest, MLP, Gradient Boosting, Extra Trees, HistGradientBoosting\n# =============================================================================="),
-        18: ("markdown", "## [Cell 18] Step 6B: Cascaded Top-3 Tabular Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)"),
-        19: ("code", "# ==============================================================================\n# [CELL 19 - CODE] STEP 6B: CASCADED TOP-3 TABULAR ARCHITECTURE (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)\n# =============================================================================="),
-        20: ("markdown", "## [Cell 20] Step 7: Overfitting and Underfitting Diagnostic Audit on Cascaded Pipeline"),
-        21: ("code", "# ==============================================================================\n# [CELL 21 - CODE] STEP 7: OVERFITTING & UNDERFITTING DIAGNOSTIC AUDIT\n# =============================================================================="),
-        22: ("markdown", "## [Cell 22] Step 8: Regularized Cascaded Pipeline Retraining"),
-        23: ("code", "# ==============================================================================\n# [CELL 23 - CODE] STEP 8: REGULARIZED CASCADED PIPELINE RETRAINING\n# =============================================================================="),
-        24: ("markdown", "## [Cell 24] Step 9: Final Test Evaluation on Quarantined Partition & Performance Metrics"),
-        25: ("code", "# ==============================================================================\n# [CELL 25 - CODE] STEP 9: FINAL TEST EVALUATION ON QUARANTINED PARTITION & METRICS\n# ==============================================================================")
+        18: ("markdown", "## [Cell 18] Step 6A-2: Dedicated Accuracy & Balanced Accuracy Benchmark (Before SMOTE vs After SMOTE)"),
+        19: ("code", "# ==============================================================================\n# [CELL 19 - CODE] STEP 6A-2: ACCURACY & BALANCED ACCURACY BENCHMARK (BEFORE vs AFTER SMOTE)\n# =============================================================================="),
+        20: ("markdown", "## [Cell 20] Step 6B: Cascaded Top-3 Tabular Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)"),
+        21: ("code", "# ==============================================================================\n# [CELL 21 - CODE] STEP 6B: CASCADED TOP-3 TABULAR ARCHITECTURE (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)\n# =============================================================================="),
+        22: ("markdown", "## [Cell 22] Step 7: Overfitting and Underfitting Diagnostic Audit on Cascaded Pipeline"),
+        23: ("code", "# ==============================================================================\n# [CELL 23 - CODE] STEP 7: OVERFITTING & UNDERFITTING DIAGNOSTIC AUDIT\n# =============================================================================="),
+        24: ("markdown", "## [Cell 24] Step 8: Regularized Cascaded Pipeline Retraining"),
+        25: ("code", "# ==============================================================================\n# [CELL 25 - CODE] STEP 8: REGULARIZED CASCADED PIPELINE RETRAINING\n# =============================================================================="),
+        26: ("markdown", "## [Cell 26] Step 9: Final Test Evaluation on Quarantined Partition & Performance Metrics"),
+        27: ("code", "# ==============================================================================\n# [CELL 27 - CODE] STEP 9: FINAL TEST EVALUATION ON QUARANTINED PARTITION & METRICS\n# ==============================================================================")
     }
 
     apply_titles(nb, cell_titles)
@@ -2669,16 +2745,18 @@ def process_unified_notebook():
         41: ("code", "# ==============================================================================\n# [CELL 41 - CODE] PART 2 - STEP 5: SMOTE RESAMPLING ON TRAINING ONLY (BEFORE vs AFTER)\n# =============================================================================="),
         42: ("markdown", "## [Cell 42] Part 2 - Step 6A: Benchmarking 5 Tabular Classifiers BEFORE SMOTE vs AFTER SMOTE"),
         43: ("code", "# ==============================================================================\n# [CELL 43 - CODE] PART 2 - STEP 6A: BENCHMARK 5 TABULAR CLASSIFIERS BEFORE vs AFTER SMOTE\n# Models: Random Forest, MLP, Gradient Boosting, Extra Trees, HistGradientBoosting\n# =============================================================================="),
-        44: ("markdown", "## [Cell 44] Part 2 - Step 6B: Cascaded Top-3 Tabular Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)"),
-        45: ("code", "# ==============================================================================\n# [CELL 45 - CODE] PART 2 - STEP 6B: CASCADED TOP-3 TABULAR INTEGRATION (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)\n# =============================================================================="),
-        46: ("markdown", "## [Cell 46] Part 2 - Step 7: Overfitting / Underfitting Detection on Cascaded Pipeline"),
-        47: ("code", "# ==============================================================================\n# [CELL 47 - CODE] PART 2 - STEP 7: GENERALIZATION GAP & OVERFITTING DIAGNOSTICS\n# =============================================================================="),
-        48: ("markdown", "## [Cell 48] Part 2 - Step 8: Regularized Cascaded Pipeline Retraining"),
-        49: ("code", "# ==============================================================================\n# [CELL 49 - CODE] PART 2 - STEP 8: REGULARIZED MODEL RETRAINING\n# =============================================================================="),
-        50: ("markdown", "## [Cell 50] Part 2 - Step 9: Final Test Evaluation on Quarantined Partition"),
-        51: ("code", "# ==============================================================================\n# [CELL 51 - CODE] PART 2 - STEP 9: FINAL TEST EVALUATION ON QUARANTINED PARTITION\n# =============================================================================="),
-        52: ("markdown", "# [Cell 52] ======================================================================\n# [Cell 52] PART 3: MULTIMODAL DECISION FUSION & OPERATIONAL EARLY-WARNING DISPATCH\n# [Cell 52] ======================================================================"),
-        53: ("code", "# ==============================================================================\n# [CELL 53 - CODE] PART 3: MULTIMODAL DECISION FUSION & OPERATIONAL EARLY-WARNING DISPATCH\n# ==============================================================================")
+        44: ("markdown", "## [Cell 44] Part 2 - Step 6A-2: Dedicated Accuracy & Balanced Accuracy Benchmark (Before SMOTE vs After SMOTE)"),
+        45: ("code", "# ==============================================================================\n# [CELL 45 - CODE] PART 2 - STEP 6A-2: ACCURACY & BALANCED ACCURACY BENCHMARK (BEFORE vs AFTER SMOTE)\n# =============================================================================="),
+        46: ("markdown", "## [Cell 46] Part 2 - Step 6B: Cascaded Top-3 Tabular Architecture (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)"),
+        47: ("code", "# ==============================================================================\n# [CELL 47 - CODE] PART 2 - STEP 6B: CASCADED TOP-3 TABULAR INTEGRATION (1 -> 2, 1 -> 3, 2 -> 3, 1 -> 2 -> 3)\n# =============================================================================="),
+        48: ("markdown", "## [Cell 48] Part 2 - Step 7: Overfitting / Underfitting Detection on Cascaded Pipeline"),
+        49: ("code", "# ==============================================================================\n# [CELL 49 - CODE] PART 2 - STEP 7: GENERALIZATION GAP & OVERFITTING DIAGNOSTICS\n# =============================================================================="),
+        50: ("markdown", "## [Cell 50] Part 2 - Step 8: Regularized Cascaded Pipeline Retraining"),
+        51: ("code", "# ==============================================================================\n# [CELL 51 - CODE] PART 2 - STEP 8: REGULARIZED MODEL RETRAINING\n# =============================================================================="),
+        52: ("markdown", "## [Cell 52] Part 2 - Step 9: Final Test Evaluation on Quarantined Partition"),
+        53: ("code", "# ==============================================================================\n# [CELL 53 - CODE] PART 2 - STEP 9: FINAL TEST EVALUATION ON QUARANTINED PARTITION\n# =============================================================================="),
+        54: ("markdown", "# [Cell 54] ======================================================================\n# [Cell 54] PART 3: MULTIMODAL DECISION FUSION & OPERATIONAL EARLY-WARNING DISPATCH\n# [Cell 54] ======================================================================"),
+        55: ("code", "# ==============================================================================\n# [CELL 55 - CODE] PART 3: MULTIMODAL DECISION FUSION & OPERATIONAL EARLY-WARNING DISPATCH\n# ==============================================================================")
     }
 
     apply_titles(nb, cell_titles)
